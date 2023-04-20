@@ -2,8 +2,11 @@
   "name": "xeptrix",
   "displayName": "Xeptrix - Document Format Converter",
   "description": "Document Format Converter for Javascript written in TypeScript",
-  "version": "0.1.0",
-  "keywords": ["format", "converter"],
+  "version": "0.1.1",
+  "keywords": [
+    "format",
+    "converter"
+  ],
   "author": "Peter Nicholls <EMAIL@ADDRESS>",
   "license": "ISC",
   "repository": {
@@ -18,14 +21,14 @@
     "lib/**/*"
   ],
   "main": "lib/index.js",
-   "types": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare" : "npm run build",
-    "prepublishOnly" : "npm test && npm run lint",
-    "preversion" : "npm run lint",
-    "version" : "npm run format && git add -A src",
-    "postversion" : "git push && git push --tags",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "test": "jest --config jestconfig.json"

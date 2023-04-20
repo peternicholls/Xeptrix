@@ -1,24 +1,42 @@
 {
   "name": "xeptrix",
-  "version": "0.1.0",
+  "displayName": "Xeptrix - Document Format Converter",
   "description": "Document Format Converter for Javascript written in TypeScript",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
-  },
+  "version": "0.1.0",
+  "keywords": ["format", "converter"],
+  "author": "Peter Nicholls <EMAIL@ADDRESS>",
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/peternicholls/xeptrix.git"
   },
-  "keywords": [],
-  "author": "Peter Nicholls",
-  "license": "ISC",
+  "homepage": "https://github.com/peternicholls/xeptrix#readme",
   "bugs": {
     "url": "https://github.com/peternicholls/xeptrix/issues"
   },
-  "homepage": "https://github.com/peternicholls/xeptrix#readme",
+  "files": [
+    "lib/**/*"
+  ],
+  "main": "lib/index.js",
+   "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint",
+    "preversion" : "npm run lint",
+    "version" : "npm run format && git add -A src",
+    "postversion" : "git push && git push --tags",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "test": "jest --config jestconfig.json"
+  },
   "devDependencies": {
+    "@types/jest": "^29.5.1",
+    "jest": "^29.5.0",
+    "prettier": "^2.8.7",
+    "ts-jest": "^29.1.0",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^5.0.4"
   }
 }

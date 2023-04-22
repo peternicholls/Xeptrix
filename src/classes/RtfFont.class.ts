@@ -7,38 +7,46 @@
 */
 
 export class RtfFont {
-  private fontTable: Map<string, number>;
+  private fontTable: Map<string, { index: number; family: string }>;
   private currentFontIndex: number;
 
   constructor() {
     this.fontTable = new Map();
     this.currentFontIndex = -1; // Start from -1, so the first font will have index 0
+
+    // Add default font
+    this.addFont('Arial', 'fswiss');
   }
 
-  addFont(fontFamily: string): number {
-    if (this.fontTable.has(fontFamily)) {
-      return this.fontTable.get(fontFamily)!;
+  addFont(fontName: string, fontFamilyDescriptor: string = ''): number {
+    if (this.fontTable.has(fontName)) {
+      return this.fontTable.get(fontName)!.index;
     }
 
     const fontIndex = ++this.currentFontIndex;
-    this.fontTable.set(fontFamily, fontIndex);
+    this.fontTable.set(fontName, { index: fontIndex, family: fontFamilyDescriptor });
     return fontIndex;
   }
 
   buildFontTableDefinition(): string {
     const fontDefinitions = Array.from(this.fontTable.entries()).map(
-      ([fontFamily, fontIndex]) => `\\f${fontIndex} \\fnil ${fontFamily}`
+      ([fontName, fontData]) => `\\f${fontData.index}\\${fontData.family} ${fontName};`
     );
-    return `\\fonttbl ${fontDefinitions.join(';')};`;
+    return `\\fonttbl{${fontDefinitions.join('')}}`;
   }
 
+  getDefaultFontSize(): string {
+    const defaultSize = 24; // 12pt in RTF units (1pt = 2 RTF units)
+    return `\\fs${defaultSize}`;
+  }
+  
   getRtfFontSizeCode(fontSize: string): string {
     const size = parseInt(fontSize, 10) * 2;
-    return `\\fs${size} `;
+    return `\\fs${size}`;
   }
 
   getRtfFontFamilyCode(fontFamily: string): string {
     const fontIndex = this.addFont(fontFamily);
-    return `\\f${fontIndex} `;
+    return `\\f${fontIndex}`;
   }
 }

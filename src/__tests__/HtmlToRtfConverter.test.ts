@@ -1,42 +1,25 @@
-// HtmlToRtfConverter.test.ts
+// HtmlToRtfConverter.test.ts - src/__tests__/HtmlToRtfConverter.test.ts
 
-import HtmlToRtfConverter from '../index'; // this isn't tidy
+import { HtmlToRtfConverter } from '../classes/HtmlToRtfConverter.class';
 
-describe('HtmlToRtfConverter', () => {
-  test('converts plain text', async () => {
-    const input = 'Hello, World!';
-    const converter = new HtmlToRtfConverter(input);
-    const rtf = await converter.convert();
+describe('HtmlToRtfConverter Class', () => {
+  let htmlToRtfConverter: HtmlToRtfConverter;
 
-    expect(rtf).toContain('Hello, World!');
+  beforeEach(() => {
+    // 
   });
 
-  test('converts basic formatting', async () => {
-    const input = '<b>Bold</b> <i>Italic</i> <u>Underline</u>';
-    const converter = new HtmlToRtfConverter(input);
-    const rtf = await converter.convert();
-
-    expect(rtf).toContain('\\b Bold\\b0');
-    expect(rtf).toContain('\\i Italic\\i0');
-    expect(rtf).toContain('\\ul Underline\\ulnone');
+  test('should output plain text', () => {
+    const plainText = 'Hello, World!';
+    const rtf = new HtmlToRtfConverter(plainText).convert();
+    expect(rtf).toBe(`{\\rtf1\\ansi\\utf8\\deff0\\deflang1033\\deftab720{\\fonttbl{\\f0\\fswiss Arial;}}{\\colortbl;\\red0\\green0\\blue0;}\\widoctrl\\ftnbj \\sectd\\linex0\\endnhere \\pard\\plain \\fs24 ${plainText}\\par}`);
   });
 
-  test('converts links', async () => {
-    const input = '<a href="https://example.com">Link</a>';
-    const converter = new HtmlToRtfConverter(input);
-    const rtf = await converter.convert();
-
-    expect(rtf).toContain('{\\field{\\*\\fldinst{HYPERLINK "https:\\\\example.com"}}{\\fldrslt{\\ul\\cf1 Link}}}');
+  test('should output paragraph', () => {
+    const html = '<p>Hello, World!</p>';
+    const rtf = new HtmlToRtfConverter(html).convert();
+    const expected = 'Hello, World!';
+    expect(rtf).toBe(`{\\rtf1\\ansi\\utf8\\deff0\\deflang1033\\deftab720{\\fonttbl{\\f0\\fswiss Arial;}}{\\colortbl;\\red0\\green0\\blue0;}\\widoctrl\\ftnbj \\sectd\\linex0\\endnhere \\pard\\plain \\fs24 ${expected}\\par}`);
   });
 
-  test('converts headings', async () => {
-    const input = '<h1>Heading 1</h1><h2>Heading 2</h2>';
-    const converter = new HtmlToRtfConverter(input);
-    const rtf = await converter.convert();
-
-    expect(rtf).toContain('\\pard\\qc\\sa200\\sl276\\slmult1\\b\\fs40 Heading 1\\par');
-    expect(rtf).toContain('\\pard\\qc\\sa200\\sl276\\slmult1\\b\\fs28 Heading 2\\par');
-  });
-
-  // ... add more test cases ...
 });

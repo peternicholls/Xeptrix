@@ -1,13 +1,14 @@
 /*
   Xeptrix
   A library for converting HTML to RTF
-  /src/HtmlToRtfConverter.ts
+  /src/HtmlToRtfConverter.class.ts
 */
-import { RtfColor } from './classes/RtfColor.class';
-import { RtfFont } from './classes/RtfFont.class';
-import { RtfBorder } from './classes/RtfBorder.class';
-import { RtfAlignment } from './classes/RtfAlignment.class';
-import { RtfStyle } from './classes/RtfStyle.class';
+import { RtfColor } from './RtfColor.class';
+import { RtfFont } from './RtfFont.class';
+import { RtfBorder } from './RtfBorder.class';
+import { RtfAlignment } from './RtfAlignment.class';
+import { RtfStyle } from './RtfStyle.class';
+import fs from 'fs';
 
 import { Sharp } from 'sharp';
 import fetch from 'node-fetch';
@@ -38,14 +39,14 @@ class JavaScriptKeywordHighlighter implements SyntaxHighlighter {
   }
 }
 
-class HtmlToRtfConverter {
+export class HtmlToRtfConverter {
   private syntaxHighlighter: SyntaxHighlighter;
   private color: RtfColor;
   private border: RtfBorder;
   private font: RtfFont;
   private currentColorIndex: number;
 
-  constructor(private html: string, syntaxHighlighter?: SyntaxHighlighter) {
+  constructor(private html: string, syntaxHighlighter?: SyntaxHighlighter) { 
     this.syntaxHighlighter = syntaxHighlighter || new DefaultSyntaxHighlighter(); // implement better highlighting with selectors
     this.html = html;
     this.color = new RtfColor();
@@ -55,35 +56,105 @@ class HtmlToRtfConverter {
   }
 
   public convert(): string {
-    const rtfContent = this.processHtml(this.html);
     const rtfHeader = this.generateRtfHeader();
-
-    return `${rtfHeader}${rtfContent} \\par}`;
+    const rtfDocument = this.buildDocument();
+    const rtfFooter = `\\par}`;
+    const rtfFile = `${rtfHeader}${rtfDocument}${rtfFooter}`;
+    console.log(rtfFile);
+    return rtfFile;
   }
 
-  private generateRtfHeader(): string {
-    const colorDefinition = this.color.buildColorTableDefinition();
+  private buildDocument(): string {
+    const info = this.generateInfoGroup(); // pass in metadata
 
-    return `{\\rtf1\\ansi\\deff0\\deflang1033 ${colorDefinition} {\\fonttbl{\\f0\\fnil\\fcharset0 Arial;}}{\\*\\generator HtmlToRtfConverter;}\\viewkind4\\uc1\\pard\\sa200\\sl276\\slmult1\\lang9\\fs22 `;
+    const contentSetup = `\\widoctrl\\ftnbj \\sectd\\linex0\\endnhere \\pard\\plain`; // spaces are important!
+
+    const defaultFontSize = this.font.getDefaultFontSize(); // 12pt. Make this configurable
+
+    const rtfContent = this.processHtml(this.html);
+    // {${info}}
+    const document = `${contentSetup} ${defaultFontSize} ${rtfContent}`; // spaces are important!
+
+    return document;
   }
 
+  private generateInfoGroup(): string {
+    // An RTF info group is optional, but can be used to store metadata about the document.
+    // \\info{\\author John Doe}{\\creatim\\yr1990\\mo7\\dy30\\hr10\\min48}{\\version1}{\\edmins0}{\\nofpages1}{\\nofwords0}{\\nofchars0}{\\vern8351}
+    // {\\info{\\title The Panda's Thumb}{\\author Stephen J Gould}{\\keywords science natural history }}
+    return ``;
+  }
 
-  private processHtml(html: string, depth: number = 0): string  {
+  private generateRtfHeader(): string { // This should be a constructor class
+    const rtfVersion = `{\\rtf1`;
+    const charset = `\\ansi`; // can this be made configurable?
+    const unicodeUS = `\\ansicpg1252`;
+    const utf8 = `\\utf8`; // what if we want to use a different encoding?
+    const defaultFont = `\\deff0`; // can this be made configurable?
+    const defaultLanguage = `\\deflang1033`; // can this be made configurable?
+    const defaultTabWidth = `\\deftab720`; // can this be made configurable?
+
+    const rtfHeader = `${rtfVersion}${charset}${utf8}${defaultFont}${defaultLanguage}${defaultTabWidth}`;
+
+    const fontTable = this.font.buildFontTableDefinition();
+
+    const fileTable = ``; // eg \filetbl{\*\fname Arial;}{\*\fname Arial;}
+
+    const colorTable = this.color.buildColorTableDefinition();
+
+    const styleSheet = ``; // eg \\stylesheet{\\fs20 \\snext0Normal;}
+
+    const listTable = ``; // eg \\listtable{\\list\\listtemplateid1\\listhybrid{\\listlevel\\levelnfc23\\leveljc0\\levelfollow0\\levelstartat1\\levelold\\levelspace360\\levelindent0{\\leveltext\\'01.\\'00;}{\\levelnumbers;}}{\\listname;}{\\listid1;}}
+
+    const revisionsTable = ``; // eg \\*\\revtbl{\\revtim0}{\\revtim1}
+
+    return `${rtfHeader}{${fontTable}}{${colorTable}}`;
+  } // {${fileTable}} // {${styleSheet}} // {${listTable}}{${revisionsTable}}`;
+
+  // ------------
+  // HTML Parsing
+
+  private processHtml(html: string, depth: number = 0): string {
     let rtfContent = '';
-    // In html, replace newlines and spaces with placeholders to preserve them
-    html = html.replace(/\r?\n/g, '{newline}').replace(/ /g, '{space}');
 
-    const elements = this.extractTagsAndAttributes(html);
-    for (const element of elements) {
-      const { tag, attributes, content } = element;
-      let rtfElement = this.processTag(tag, content, depth);
-      rtfElement = this.applyAttributesToRtf(rtfElement, attributes, depth);
-      rtfContent += rtfElement;
-    }
+    // In html, replace newlines and spaces with placeholders to preserve them
+    html = html.replace(/\r?\n/g, '{newline}');
+
+    const regex = /(<([^>]+)>([^<]*)<\/[^>]+>)/g;
+    const splitContent = html.split(regex);
+
+    splitContent.forEach((part, idx) => {
+      if (part.trim() === '') return;
+
+      const match = regex.exec(part);
+
+      if (match) {
+        const tagAndAttributes = match[2].trim().split(/\s+/);
+        const tag = tagAndAttributes.shift()!;
+        const attributes: Record<string, string> = {};
+
+        for (const attribute of tagAndAttributes) {
+          const [attrName, attrValue] = attribute.split('=');
+          attributes[attrName] = attrValue.replace(/"/g, '');
+        }
+
+        let rtfElement = this.processTag(tag, match[3], depth);
+        rtfElement = this.applyAttributesToRtf(rtfElement, attributes, depth);
+        rtfContent += rtfElement;
+      } else {
+        rtfContent = this.handleSpaces(this.escapeRtfSpecialChars(part));
+      }
+    });
+    
     // Replace placeholders with RTF commands for newlines and spaces
-    rtfContent = rtfContent.replace(/{newline}/g, '\\par').replace(/{space}/g, '\\~');
+    rtfContent = rtfContent.replace(/{newline}/g, '\\par');
 
     return rtfContent;
+  }
+
+  private handleSpaces(text: string): string {
+      // return text.replace(/ /g, '\\~');
+      return text;
   }
 
   private async processSvg(svgContent: string): Promise<string> {
@@ -94,27 +165,6 @@ class HtmlToRtfConverter {
   private async processImage(attributes: Record<string, string>): Promise<string> {
     // Implement image processing
     return '';
-  }
-
-  private extractTagsAndAttributes(html: string): Array<{ tag: string; attributes: Record<string, string>; content: string }> {
-    const elements: Array<{ tag: string; attributes: Record<string, string>; content: string }> = [];
-    const tagRegex = /<([^>]+)>([^<]*)<\/[^>]+>/g;
-    let match;
-
-    while ((match = tagRegex.exec(html)) !== null) {
-      const tagAndAttributes = match[1].trim().split(/\s+/);
-      const tag = tagAndAttributes.shift()!;
-      const attributes: Record<string, string> = {};
-
-      for (const attribute of tagAndAttributes) {
-        const [attrName, attrValue] = attribute.split('=');
-        attributes[attrName] = attrValue.replace(/"/g, '');
-      }
-
-      elements.push({ tag, attributes, content: match[2] });
-    }
-
-    return elements;
   }
 
   private processTag(tag: string, content: string, depth: number): string {
@@ -161,7 +211,26 @@ class HtmlToRtfConverter {
   }
 
   private escapeRtfSpecialChars(text: string): string {
-    return text.replace(/[{}\\]/g, '\\$&');
+    var escapeText = function(text: string) {
+      // Escape {} and \ characters.
+      text = text.replace(/[{}\\]/g, '\\$&');
+
+      // Escape / characters.
+      text = text.replace(/\//g, '\\\\');
+
+      // Escape { characters.
+      text = text.replace(/{/g, '\\{');
+
+      // Escape } characters.
+      text = text.replace(/}/g, '\\}');
+
+      // Escape tab characters.
+      text = text.replace(/\t/g, '\\tab ');
+
+      return text;
+    };
+
+    return escapeText(text);
   }
 
   private applyAttributesToRtf(rtf: string, attributes: Record<string, string>, depth: number): string {
@@ -262,11 +331,6 @@ class HtmlToRtfConverter {
 
     return styleCommands + rtf;
   }
-
-  private escapeSpecialChars(text: string): string {
-    return text.replace(/\//g, '\\\\').replace(/{/g, '\\{').replace(/}/g, '\\}').replace(/\t/g, '\\tab ');
-  }
-
 }
 
 export default HtmlToRtfConverter;

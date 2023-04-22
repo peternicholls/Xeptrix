@@ -12,7 +12,10 @@ export class RtfColor {
 
   constructor() {
     this.colorTable = new Map();
-    this.currentColorIndex = 0;
+    this.currentColorIndex = -1;
+
+    // Add default color
+    this.addColor(this.getDefaultColor());
   }
 
   addColor(color: [number, number, number]): number {
@@ -31,7 +34,8 @@ export class RtfColor {
     const colorDefinitions = Array.from(this.colorTable.keys()).map(
       (colorKey) => `\\red${colorKey.split(',')[0]}\\green${colorKey.split(',')[1]}\\blue${colorKey.split(',')[2]}`
     );
-    return `\\colortbl ;${colorDefinitions.join(';')};`;
+    const colorDefinitionsString = colorDefinitions.join(';');
+    return colorDefinitionsString.length > 0 ? `\\colortbl;${colorDefinitionsString};` : `\\colortbl;`;
   }
   
   parseColor(colorString: string): [number, number, number] {
@@ -41,6 +45,10 @@ export class RtfColor {
     const blue = color & 0xFF;
 
     return [red, green, blue];
+  }
+
+  getDefaultColor(): [number, number, number] {
+    return [0, 0, 0];
   }
   
 }

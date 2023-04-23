@@ -1,19 +1,20 @@
 {
   "name": "xeptrix",
+  "version": "0.1.1",
   "displayName": "Xeptrix - Document Format Converter",
   "description": "Document Format Converter for Javascript written in TypeScript",
-  "version": "0.1.1",
   "keywords": [
     "format",
     "html",
+    "parser",
     "rtf",
     "convert",
     "node",
     "javascript",
     "typescript"
   ],
-  "author": "Peter Nicholls <EMAIL@ADDRESS>",
-  "license": "ISC",
+  "author": "Peter Nicholls <halos_augury_06@icloud.com>",
+  "license": "AGPLv3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/peternicholls/xeptrix.git"

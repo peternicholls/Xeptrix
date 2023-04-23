@@ -9,5 +9,3 @@
 interface RtfBuilder {
   build(): string;
 }
-
-export default RtfBuilder;

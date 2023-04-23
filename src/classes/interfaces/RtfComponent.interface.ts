@@ -9,5 +9,3 @@
 interface RtfComponent {
   toString(): string;
 }
-
-export default RtfComponent;

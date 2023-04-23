@@ -22,5 +22,3 @@ class HeaderDocumentDefaults implements RtfElement {
     return `\\deff${this.defaultFont} \\deflang${this.defaultLanguage}`;
   }
 }
-
-export default HeaderDocumentDefaults;

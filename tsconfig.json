@@ -9,13 +9,18 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true
     },
-    "include":  ["src", "Xeptrix.class.ts"],
+    "include":  ["src"],
     "exclude": 
     [
+        "output",
         "node_modules", 
         "**/__tests__/*", 
         "**/components/*", // excluded as not in release build
         "**/elements/*", // excluded as not in release build
         "**/enums/*", // excluded as not in release build
+        "**/interfaces/*", // excluded as not in release build
+        "**/models/*", // excluded as not in release build
+        "**/HtmlToRtfParser.class.ts",
+        "**/classes/RtfStreamBuilder.class.ts"
     ]
 }

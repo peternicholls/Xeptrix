@@ -39,11 +39,15 @@ export class RtfColor {
   }
   
   parseColor(colorString: string): [number, number, number] {
+    // const color = parseInt(colorString.substr(1), 16);
+    // const red = (color >> 16) & 0xFF;
+    // const green = (color >> 8) & 0xFF;
+    // const blue = color & 0xFF;
     const color = parseInt(colorString.substr(1), 16);
-    const red = (color >> 16) & 0xFF;
-    const green = (color >> 8) & 0xFF;
-    const blue = color & 0xFF;
-
+    const red = Math.floor(color / (16 ** 4)) % 256;
+    const green = Math.floor(color / (16 ** 2)) % 256;
+    const blue = color % 256;
+    
     return [red, green, blue];
   }
 

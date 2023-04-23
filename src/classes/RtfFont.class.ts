@@ -30,7 +30,7 @@ export class RtfFont {
 
   buildFontTableDefinition(): string {
     const fontDefinitions = Array.from(this.fontTable.entries()).map(
-      ([fontName, fontData]) => `\\f${fontData.index}\\${fontData.family} ${fontName};`
+      ([fontName, fontData]) => `\\f${fontData.index}\\${fontData.family} ${fontName};`,
     );
     return `\\fonttbl{${fontDefinitions.join('')}}`;
   }
@@ -39,7 +39,7 @@ export class RtfFont {
     const defaultSize = 24; // 12pt in RTF units (1pt = 2 RTF units)
     return `\\fs${defaultSize}`;
   }
-  
+
   getRtfFontSizeCode(fontSize: string): string {
     const size = parseInt(fontSize, 10) * 2;
     return `\\fs${size}`;

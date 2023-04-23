@@ -10,7 +10,7 @@
 import { RtfElement } from './RtfElement.interface';
 
 export class HeaderCharset implements RtfElement {
-    generateRtfCode(): string {
-        return '\\ansi';
-    }
+  generateRtfCode(): string {
+    return '\\ansi';
+  }
 }

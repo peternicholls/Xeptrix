@@ -42,7 +42,9 @@ describe('RtfColor Class', () => {
     rtfColor.addColor([255, 170, 187]);
     rtfColor.addColor([0, 255, 128]);
     const colorTableDefinition = rtfColor.buildColorTableDefinition();
-    expect(colorTableDefinition).toBe('\\colortbl;\\red0\\green0\\blue0;\\red255\\green170\\blue187;\\red0\\green255\\blue128;');
+    expect(colorTableDefinition).toBe(
+      '\\colortbl;\\red0\\green0\\blue0;\\red255\\green170\\blue187;\\red0\\green255\\blue128;',
+    );
   });
 
   test('buildColorTableDefinition should include all added colors', () => {
@@ -51,7 +53,9 @@ describe('RtfColor Class', () => {
     rtfColor.addColor([26, 43, 60]);
 
     const colorTableDefinition = rtfColor.buildColorTableDefinition();
-    expect(colorTableDefinition).toBe('\\colortbl;\\red0\\green0\\blue0;\\red255\\green170\\blue187;\\red0\\green255\\blue128;\\red26\\green43\\blue60;');
+    expect(colorTableDefinition).toBe(
+      '\\colortbl;\\red0\\green0\\blue0;\\red255\\green170\\blue187;\\red0\\green255\\blue128;\\red26\\green43\\blue60;',
+    );
   });
 
   test('parseColor should correctly parse hexadecimal color strings', () => {
@@ -64,6 +68,4 @@ describe('RtfColor Class', () => {
     expect(rtfColor.parseColor('#fFaAbB')).toEqual([255, 170, 187]);
     expect(rtfColor.parseColor('#00ff80')).toEqual([0, 255, 128]);
   });
-
-
 });

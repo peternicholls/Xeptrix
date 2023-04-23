@@ -33,6 +33,5 @@ export const styleReferenceList: StyleEntry[] = [
     },
   },
 
-
   // Add more style attributes here...
 ];

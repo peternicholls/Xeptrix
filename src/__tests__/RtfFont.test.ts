@@ -63,5 +63,4 @@ describe('RtfFont Class', () => {
     const fontTableDefintestion = rtfFont.buildFontTableDefinition();
     expect(fontTableDefintestion).toBe('\\fonttbl{\\f0\\fswiss Arial;}');
   });
-
 });

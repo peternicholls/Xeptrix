@@ -11,12 +11,12 @@ class HeaderDocumentDefaults implements RtfElement {
   defaultFont: number = 0;
   defaultLanguage: number = Language.EnglishUS;
 
-  constructor(defaultFont: number, defaultLanguage: number) { 
+  constructor(defaultFont: number, defaultLanguage: number) {
     this.defaultFont = defaultFont;
     this.defaultLanguage = defaultLanguage;
-}
+  }
 
   generateRtfCode(): string {
-      return `\\deff${this.defaultFont} \\deflang${this.defaultLanguage}`;
+    return `\\deff${this.defaultFont} \\deflang${this.defaultLanguage}`;
   }
 }

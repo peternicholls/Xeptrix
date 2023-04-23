@@ -5,12 +5,12 @@
 
   /src/Xeptrix.class.ts
 */
-import { RtfColor } from './src/classes/RtfColor.class';
-import { RtfFont } from './src/classes/RtfFont.class';
-import { RtfBorder } from './src/classes/RtfBorder.class';
-import { RtfAlignment } from './src/classes/RtfAlignment.class';
-import { RtfStyle } from './src/classes/RtfStyle.class';
-import { SyntaxHighlighter, DefaultSyntaxHighlighter } from './src/classes/SyntaxHighlighter.class';
+import { RtfColor } from './RtfColor.class';
+import { RtfFont } from './RtfFont.class';
+import { RtfBorder } from './RtfBorder.class';
+import { RtfAlignment } from './RtfAlignment.class';
+import { RtfStyle } from './RtfStyle.class';
+import { SyntaxHighlighter, DefaultSyntaxHighlighter } from './SyntaxHighlighter.class';
 import fs from 'fs';
 import { Sharp } from 'sharp';
 import fetch from 'node-fetch';
@@ -191,8 +191,8 @@ export class Xeptrix {
     }
   }
 
-  private escapeRtfSpecialChars(text: string): string {
-    var escapeText = function(text: string) {
+  private escapeRtfSpecialChars(inputText: string): string {
+    const escapeText = (text: string) => {
       // Escape {} and \ characters.
       text = text.replace(/[{}\\]/g, '\\$&');
 
@@ -211,7 +211,7 @@ export class Xeptrix {
       return text;
     };
 
-    return escapeText(text);
+    return escapeText(inputText);
   }
 
   private applyAttributesToRtf(rtf: string, attributes: Record<string, string>, depth: number): string {
@@ -238,7 +238,7 @@ export class Xeptrix {
   }
 
   private applyLinkAttributesToRtf(rtf: string, attributes: Record<string, string>): string {
-    const href = attributes['href'];
+    const href = attributes.href;
     if (href) {
       const escapedHref = this.escapeRtfSpecialChars(href);
       rtf = `\\field{\\*\\fldinst HYPERLINK "${escapedHref}"}{\\fldrslt\\ul ${rtf}}\\ulnone `;
@@ -264,12 +264,9 @@ export class Xeptrix {
   private applyStyleAttributesToRtf(rtf: string, attributes: Record<string, string>): string {
     let styleCommands = '';
 
-    for (const key in attributes) 
-    {
-      const value = attributes[key];
+    for (const [key, value] of Object.entries(attributes)) {
       const styleCode = RtfStyle.getRtfStyleCode(key, value);
-      if (styleCode) 
-      {
+      if (styleCode) {
         styleCommands += styleCode;
       } else {
         switch (key) 
@@ -314,4 +311,4 @@ export class Xeptrix {
   }
 }
 
-export default HtmlToRtfConverter;
+export default Xeptrix;

@@ -4,7 +4,7 @@
   HtmltoRtfParser class
 
   /src/classes/HtmltoRtfParser.class.ts
-*/
+
 
 export class HtmlToRtfParser {
   constructor(private html: string, syntaxHighlighter?: SyntaxHighlighter) {
@@ -27,3 +27,4 @@ export class HtmlToRtfParser {
     // ...
   }
 }
+*/

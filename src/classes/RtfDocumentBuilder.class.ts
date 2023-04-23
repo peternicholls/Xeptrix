@@ -4,7 +4,7 @@
   RtfDocumentBuilder class
 
   /src/classes/RtfDocumentBuilder.class.ts
-*/
+
 
 import { HtmlToRtfParser } from './HtmlToRtfParser.class';
 
@@ -20,3 +20,4 @@ class RtfDocumentBuilder implements RtfBuilder {
     return this.components.map((component) => component.toString()).join('');
   }
 }
+*/

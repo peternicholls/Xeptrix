@@ -105,3 +105,154 @@ console.log(rtfOutput);
 ```
 
 The example above will highlight JavaScript keywords in blue. Keep in mind that this is a very basic example, and real-world syntax highlighters will be much more complex.
+
+
+## RTF Specification
+Header:
+  Start of File Tag
+  RTF Version
+  Character Set
+  Unicode RTF
+    Document Text
+    Destination Text
+  Font Table
+    Font Embedding
+    Code Page Support
+  File Table
+  Color Table
+  Style Sheet
+  List Table
+    Top-level List Properties
+    List Levels
+      List Override Table
+      List Override Level
+  Track Changes (Revision Marks)
+
+Content:
+  Information Group
+  Document Group
+    Section Text
+    Paragraph Text
+    Character Text
+    Table Text
+    List Text
+    Hyperlink Text
+  Document Properties [TBC]
+  Bookmarks
+  Images
+    Embedded Bitmap Image Data
+    Linked Images
+    SVG Images
+  Object Data [TBC]
+    Publisher Object Data [TBC]
+    Drawing Object Data [TBC]
+    Other Object Data [TBC]
+  Footnotes
+  Comments/Annotations
+  Fields
+  Form Fields
+  Index Entries
+  Table of Contents Entries
+  Bidirectional Language Support
+
+Footer:
+  End of File Tag
+
+
+Now we have a vision of where we are going, we shall now concentrate on the higher level design of our software components. We are going to follow the RTF specification and model classes using UML, so anyone can look at our diagrams and know what the road map for the RTF Builder is.
+
+There are a lot of things that are optional, and things that can also be optionally set/changed. Some things always stay the same. We want to encapsulate the complexity don't we so it is simple to get output straight "out of the box". But also so users of the RTF Builder can also use the full power of the RTF specification if they wish.
+
+We will get in to enforcement of syntax along the way, but at this stage we want to think of our interfaces, components, classes, properties and methods. We know what the reader of an RTF stream is concerned with. 
+
+We can separate the concerns of the RTF Builder into three main areas: 
+
+1. Header:
+- Start of File Tag
+- RTF Version
+- Character Set
+- Unicode RTF
+  - Document Text
+  - Destination Text
+- Font Table
+  - Font Embedding
+  - Code Page Support
+- File Table
+- Color Table
+- Style Sheet
+- List Table
+  - Top-level List Properties
+  - List Levels
+    - List Override Table
+    - List Override Level
+- Track Changes (Revision Marks)
+
+2. Content:
+- Information Group
+- Document Group
+  - Section Text
+  - Paragraph Text
+  - Character Text
+  - Table Text
+  - List Text
+  - Hyperlink Text
+- Document Properties [TBC]
+- Bookmarks
+- Images
+  - Embedded Bitmap Image Data
+  - Linked Images
+  - SVG Images
+- Object Data [TBC]
+  - Publisher Object Data [TBC]
+  - Drawing Object Data [TBC]
+  - Other Object Data [TBC]
+- Footnotes
+- Comments/Annotations
+- Fields
+- Form Fields
+- Index Entries
+- Table of Contents Entries
+- Bidirectional Language Support  [TBC]
+
+3. Footer
+- End of File Tag
+
+To encapsulate the complexity and create a clear road map for the RTF Builder, it's essential to follow the RTF specification and create a UML diagram representing the components, interfaces, and their relationships. This will make it easier for users to understand the overall structure and use the RTF Builder more efficiently.
+
+Here's a high-level design suggestion:
+
+**RtfElement.interface**: A common interface for all RTF components, ensuring that each component follows a standard set of methods.
+    ```generateRtfCode(): string```
+
+**RtfHeader, RtfInfoGroup, RtfContent, RtfFooter**: Classes implementing the ```RtfElement.interface``` interface.
+- Each class will be responsible for its part of the RTF document.
+
+**RtfElementFactory**: A factory class to generate instances of RTF components (e.g., Header, Footer, etc.).
+- This class will have methods like ```createHeader()```, ```createFooter()```, etc., which return instances of the corresponding classes.
+
+**RtfDocumentBuilder**: A class responsible for coordinating the construction of the RTF document.
+- It will have methods like ```addHeader()```, ```addFooter()```, ```addContent()```, etc., to set different components.
+It will also have a ```build()``` method that combines all added elements into the final RTF document.
+
+**HtmlToRtfParser**: A class responsible for parsing HTML and transforming it into corresponding RTF components.
+- It will have methods like ```parse(html: string)``` and may internally use ```RtfElementFactory``` to create components.
+- By defining these components and their responsibilities, you provide a flexible yet powerful system for users to create RTF documents. Users can choose to use the provided HtmlToRtfParser to convert HTML to RTF or directly build their documents using the RtfDocumentBuilder and various RTF components.
+
+With a clear UML diagram based on this design, developers can easily understand the structure and relationships between the components, making it easier to extend or modify the RTF Builder.
+
+<header>
+  \rtf <charset> \deff? <fonttbl> <filetbl>? <colortbl>? <stylesheet>? <listtables>? <revtbl>?
+
+<document>
+  <info>? <docfmt>* <section>+
+
+<footer>
+
+ <header> composed of `\rtf` <charset> `\deff`?  <fonttbl> 
+<document> composed of  <dodfmt>* <section>+
+<footer> which is `}` termination of the rtf stream
+
+Key to symbols:
+a?	Item a is optional.
+a+	One or more repetitions of item a.
+a*	Zero or more repetitions of item a.

@@ -8,4 +8,7 @@
 
 interface RtfElement {
   generateRtfCode(): string;
+  isNotEmpty(): boolean;
 }
+
+export default RtfElement;

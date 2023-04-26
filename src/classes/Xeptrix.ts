@@ -3,27 +3,27 @@
 
   Xeptrix class
 
-  /src/Xeptrix.class.ts
+  /src/classes/Xeptrix.class.ts
 */
 import { RtfColor } from './RtfColor.class';
 import { RtfFont } from './RtfFont.class';
 import { RtfBorder } from './RtfBorder.class';
 import { RtfAlignment } from './RtfAlignment.class';
 import { RtfStyle } from './RtfStyle.class';
-import { SyntaxHighlighter, DefaultSyntaxHighlighter } from './SyntaxHighlighter.class';
+import DefaultSyntaxHighlighter from './DefaultSyntaxHighlighter.class';
+
 import fs from 'fs';
 import { Sharp } from 'sharp';
 import fetch from 'node-fetch';
 import { JSDOM } from 'jsdom';
 
-
-export class Xeptrix {
-  private syntaxHighlighter: SyntaxHighlighter;
+class Xeptrix {
+  private syntaxHighlighter: DefaultSyntaxHighlighter;
   private color: RtfColor;
   private border: RtfBorder;
   private font: RtfFont;
 
-  constructor(private html: string, syntaxHighlighter?: SyntaxHighlighter) { 
+  constructor(private html: string, syntaxHighlighter?: DefaultSyntaxHighlighter) {
     this.syntaxHighlighter = syntaxHighlighter || new DefaultSyntaxHighlighter(); // implement better highlighting with selectors
     this.html = html;
     this.color = new RtfColor();
@@ -40,7 +40,7 @@ export class Xeptrix {
     const rtfDocument = this.buildDocument();
     const rtfFooter = `\\par}`;
     const rtfFile = `${rtfHeader}${rtfDocument}${rtfFooter}`;
-    
+
     return rtfFile;
   }
 
@@ -65,7 +65,8 @@ export class Xeptrix {
     return ``;
   }
 
-  private generateRtfHeader(): string { // This should be a constructor class
+  private generateRtfHeader(): string {
+    // This should be a constructor class
     const rtfVersion = `{\\rtf1`;
     const charset = `\\ansi`; // can this be made configurable?
     const unicodeUS = `\\ansicpg1252`;
@@ -126,7 +127,7 @@ export class Xeptrix {
         rtfContent = this.handleSpaces(this.escapeRtfSpecialChars(part));
       }
     });
-    
+
     // Replace placeholders with RTF commands for newlines and spaces
     rtfContent = rtfContent.replace(/{newline}/g, '\\par');
 
@@ -134,8 +135,8 @@ export class Xeptrix {
   }
 
   private handleSpaces(text: string): string {
-      // return text.replace(/ /g, '\\~');
-      return text;
+    // return text.replace(/ /g, '\\~');
+    return text;
   }
 
   private async processSvg(svgContent: string): Promise<string> {
@@ -269,8 +270,7 @@ export class Xeptrix {
       if (styleCode) {
         styleCommands += styleCode;
       } else {
-        switch (key) 
-        {
+        switch (key) {
           case 'font-size':
             styleCommands += this.font.getRtfFontSizeCode(value);
             break;

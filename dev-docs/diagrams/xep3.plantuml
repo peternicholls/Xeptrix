@@ -1,0 +1,161 @@
+@startuml
+
+class Xeptrix {
+  - inputData
+  - inputType
+  - outputType
+  + runParser()
+  + runDocumentBuilder()
+}
+
+interface Builder {
+  + build() : Object
+}
+
+class Parser {
+  - parsedOutput
+  + chooseConversionStrategy()
+  + getParsedOutput() : ParsedOutput
+}
+
+interface ParsingStrategy {
+  + convert()
+}
+
+class HtmlToRtfParsingStrategy {
+}
+
+class HtmlTagToRtf {
+}
+
+class Picture {
+}
+
+class DocumentBuilder {
+  - builderStrategy : BuilderStrategy
+  + buildElements(parsedOutput : ParsedOutput)
+}
+
+interface BuilderStrategy {
+  + build() : List<Component>
+}
+
+class RtfBuilderStrategy {
+}
+
+class RtfComponent {
+  + buildComponents()
+}
+
+class Header {
+    + buildElements()
+}
+
+class DocumentArea {
+    + buildElements()
+}
+
+class Footer {
+
+}
+
+class Revisions {
+}
+
+class MetaInformation {
+}
+
+class FontTable {
+}
+
+class CharacterSet {
+}
+
+class Table {
+}
+
+class DocumentDefaults {
+}
+
+class Enums {
+}
+
+class ParsedOutput {
+}
+
+interface RtfConvertible {
+  + createRtf() : String
+}
+
+
+
+Xeptrix <-- DocumentBuilder
+DocumentBuilder <-- Parser
+
+Parser ..|> Builder
+DocumentBuilder ..|> Builder
+
+Parser -- "1" ParsingStrategy
+ParsingStrategy <|-- HtmlToRtfParsingStrategy
+HtmlToRtfParsingStrategy "1" -- "*" DocumentFormattingProperties
+DocumentFormattingProperties <|-- DocumentViews
+DocumentFormattingProperties <|-- References
+DocumentFormattingProperties <|-- StyleLinker
+DocumentFormattingProperties <|-- Forms
+DocumentFormattingProperties <|-- RevisionMarks
+DocumentFormattingProperties <|-- Comments
+DocumentFormattingProperties <|-- DrawingGrid
+DocumentFormattingProperties <|-- PageBorders
+
+HtmlToRtfParsingStrategy "1" -- "*" Paragraph
+Paragraph "*" --- "*" Formatting
+Paragraph "*" --- "*" Alignment
+Paragraph "*" --- "*" FontAlignment
+Paragraph "*" --- "*" Indentation
+Paragraph "*" --- "*" Tabs
+Paragraph "*" --- "*" BulletsAndNumbering
+Paragraph "*" --- "*" RevisionMarks
+Paragraph "*" --- "*" ParagraphBorders
+
+
+RevisionMarks"*" --- "*" TrackChanges
+
+HtmlToRtfParsingStrategy "1" -- "*" HtmlTagToRtf
+HtmlTagToRtf "*" --- "*"  Picture
+HtmlTagToRtf "*" --- "*"  Color
+HtmlTagToRtf "*" --- "*"  Font
+
+HtmlTagToRtf "*" --- "*"  Style
+HtmlTagToRtf "*" --- "*"  Table
+HtmlTagToRtf "*" --- "*"  Border
+HtmlTagToRtf "*" --- "*"  String
+String  "*" --- "*"  Character
+
+
+DocumentBuilder -- "1" BuilderStrategy
+BuilderStrategy <|-- RtfBuilderStrategy
+RtfBuilderStrategy "1" -- "*" RtfComponent
+RtfComponent -- Header
+RtfComponent -- DocumentArea
+RtfComponent -- Footer
+Header "1" --- "*" Revisions
+Header "1" --- "*" MetaInformation
+Header "1" -- "*" DocumentDefaults
+Header "1" -- "*" FontTable
+Header "1" -- "*" CharacterSet
+Revisions -- Enums
+MetaInformation -- Enums
+FontTable -- Enums
+CharacterSet -- Enums
+DocumentDefaults -- Enums
+
+Revisions ...|> RtfConvertible
+MetaInformation ...|> RtfConvertible
+FontTable ...|> RtfConvertible
+CharacterSet ...|> RtfConvertible
+DocumentDefaults ...|> RtfConvertible
+
+Parser - ParsedOutput
+ParsedOutput ..> BuilderStrategy : << inject >>
+
+@enduml

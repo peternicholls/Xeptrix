@@ -1,0 +1,92 @@
+@startuml
+
+interface RtfElement {
+  +generateRtfCode(): string
+  +isNotEmpty(): boolean
+}
+
+abstract class AbstractHeaderElement {
+  +generateRtfCode(): string
+  +isNotEmpty(): boolean
+}
+
+abstract class AbstractDocumentElement {
+  +generateRtfCode(): string
+  +isNotEmpty(): boolean
+}
+
+class RTFHeader {
+  +elements: RtfElement[]
+  +colorTable: RtfColor
+  +documentDefaults: DocumentDefaults
+  +setColorTable(colorTable: RtfColor): void
+  +toString(): string
+}
+
+class RTFDocumentArea {
+  +elements: RtfElement[]
+  +content: DocumentContent
+  +setContent(content: DocumentContent): void
+  +toString(): string
+}
+
+interface DocumentBuilder {
+  +buildHeader(parsedData: ParsedHtmlData): string
+  +buildDocumentArea(parsedData: ParsedHtmlData): string
+}
+
+class RTFDocumentBuilder {
+  +buildHeader(parsedData: ParsedHtmlData): string
+  +buildDocumentArea(parsedData: ParsedHtmlData): string
+}
+
+class HtmlToRtfParser {
+  +parse(html: string): ParsedHtmlData
+}
+
+class ParsedHtmlData {
+  -content: DocumentContent
+  -colorTable: RtfColor
+  -fontTable: string[]
+  +getContent(): DocumentContent
+  +getColorTable(): RtfColor
+  +getFontTable(): string[]
+}
+
+class DocumentContent {
+  -elements: AbstractDocumentElement[]
+  +addElement(element: AbstractDocumentElement): void
+  +getElements(): AbstractDocumentElement[]
+  +toString(): string
+}
+
+class DocumentDefaults {
+  -elements: AbstractHeaderElement[]
+  +defaultColor: RtfColor
+  +setDefaultColor(defaultColor: RtfColor): void
+}
+
+class RtfColor {
+  +addColor(color: [number, number, number]): number
+  +buildColorTableDefinition(): string
+  +parseColor(colorString: string): [number, number, number]
+  +getDefaultColor(): [number, number, number]
+}
+
+DocumentBuilder <|.. RTFDocumentBuilder
+RTFDocumentBuilder ..> RTFHeader : uses
+RTFDocumentBuilder ..> RTFDocumentArea : uses
+RTFHeader *-- AbstractHeaderElement : contains
+RTFDocumentArea *-- AbstractDocumentElement : contains
+HtmlToRtfParser ....> ParsedHtmlData : creates
+AbstractDocumentElement "0..*" --- "1" DocumentContent
+AbstractHeaderElement "0..*" --- "1" DocumentDefaults
+RTFHeader ..> RtfColor : uses
+HtmlToRtfParser ...> RtfColor : uses
+DocumentDefaults ....> RtfColor : uses
+ParsedHtmlData --- RtfColor : stores
+ParsedHtmlData --- DocumentContent : stores
+RtfElement <|.. AbstractHeaderElement
+RtfElement <|.. AbstractDocumentElement
+
+@enduml

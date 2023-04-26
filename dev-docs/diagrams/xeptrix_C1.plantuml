@@ -1,0 +1,27 @@
+@startuml
+class Director {
+    -Builder builder
+    +Construct()
+}
+interface Builder {
+    +BuildPartA()
+    +BuildPartB()
+    +GetResult(): Product
+}
+class ConcreteBuilder {
+    -Product product
+    +BuildPartA()
+    +BuildPartB()
+    +GetResult(): Product
+}
+class Product {
+    -partA
+    -partB
+    +AddPartA()
+    +AddPartB()
+    +Display()
+}
+Director -> Builder
+Builder <|.. ConcreteBuilder
+Builder -> Product
+@enduml

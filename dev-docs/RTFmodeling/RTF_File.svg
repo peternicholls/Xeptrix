@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="280.1458px" preserveAspectRatio="none" style="width:553px;height:280px;background:#FFFFFF;" version="1.1" viewBox="0 0 553 280" width="553.2292px" zoomAndPan="magnify"><defs><filter height="300%" id="f13muo0fm8q2mp" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="4.708333333333333"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="9.416666666666666" dy="9.416666666666666" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[6e8aaf733c8e58e79f2afa59381b249c]
+cluster File--><polygon fill="#FFFFFF" filter="url(#f13muo0fm8q2mp)" points="37.6667,14.125,127.125,14.125,143.6042,66.6156,513.2083,66.6156,513.2083,263.6667,37.6667,263.6667,37.6667,14.125" style="stroke:#000000;stroke-width:3.53125;"/><line style="stroke:#000000;stroke-width:3.53125;" x1="37.6667" x2="143.6042" y1="66.6156" y2="66.6156"/><text fill="#000000" font-family="Menlo" font-size="32.9583" font-weight="bold" lengthAdjust="spacing" textLength="75.3333" x="47.0833" y="49.426">File</text><!--MD5=[1dd18f671b6842f796bbe8e9558775fb]
+cluster { }--><rect fill="#FFFFFF" filter="url(#f13muo0fm8q2mp)" height="167.1458" style="stroke:#000000;stroke-width:3.53125;" width="437.875" x="56.5" y="77.6875"/><path d="M136.5417,77.6875 L136.5417,99.5739 L113,123.1156 L56.5,123.1156 " fill="none" style="stroke:#000000;stroke-width:3.53125;"/><text fill="#000000" font-family="Menlo" font-size="32.9583" font-weight="bold" lengthAdjust="spacing" textLength="56.5" x="63.5625" y="110.6343">{ }</text><!--MD5=[c2d43cb9f80312c3c5689cc66c9c38e1]
+entity header--><rect fill="#FEFECE" filter="url(#f13muo0fm8q2mp)" height="85.4489" style="stroke:#000000;stroke-width:3.53125;" width="160.0833" x="315.4583" y="141.25"/><text fill="#000000" font-family="Menlo" font-size="32.9583" lengthAdjust="spacing" textLength="113" x="339" y="195.3843">header</text><!--MD5=[ed21734bf4b7460cda4bd124807a15d0]
+entity document--><rect fill="#FEFECE" filter="url(#f13muo0fm8q2mp)" height="85.4489" style="stroke:#000000;stroke-width:3.53125;" width="197.75" x="75.3333" y="141.25"/><text fill="#000000" font-family="Menlo" font-size="32.9583" lengthAdjust="spacing" textLength="150.6667" x="98.875" y="195.3843">document</text><!--MD5=[5026f2409c9d196322da12fa949f1e0b]
+@startuml
+!pragma layout smetana
+skinparamlocked dpi 226
+skinparamlocked defaultFontName Menlo
+
+package File {
+    frame "{ }" {
+        rectangle header
+        rectangle document
+    }
+}
+
+@enduml
+
+PlantUML version 1.2022.1(Tue Feb 01 18:19:58 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: AU
+--></g></svg>

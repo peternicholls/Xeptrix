@@ -1,0 +1,49 @@
+@startuml
+
+interface RtfElement {
+  +generateRtfCode(): string
+  +isNotEmpty(): boolean
+}
+
+abstract class AbstractHeaderElement {
+  +generateRtfCode(): string
+  +isNotEmpty(): boolean
+}
+
+abstract class AbstractDocumentElement {
+  +generateRtfCode(): string
+  +isNotEmpty(): boolean
+}
+
+RtfElement <|.. AbstractHeaderElement
+RtfElement <|.. AbstractDocumentElement
+
+class RTFHeader {
+  +elements: RtfElement[]
+  +toString(): string
+}
+
+class RTFDocumentArea {
+  +elements: RtfElement[]
+  +toString(): string
+}
+
+interface DocumentBuilder {
+  +buildHeader(): string
+  +buildDocumentArea(): string
+}
+
+class RTFDocumentBuilder {
+  +header: RTFHeader
+  +documentArea: RTFDocumentArea
+  +buildHeader(): string
+  +buildDocumentArea(): string
+}
+
+DocumentBuilder <|.. RTFDocumentBuilder
+RTFDocumentBuilder *-- RTFHeader
+RTFDocumentBuilder *-- RTFDocumentArea
+RTFHeader *-- AbstractHeaderElement : contains
+RTFDocumentArea *-- AbstractDocumentElement : contains
+
+@enduml

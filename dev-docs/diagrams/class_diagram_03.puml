@@ -1,0 +1,69 @@
+@startuml
+interface RtfComponent {
+    +getRtfCode(): String
+}
+
+interface RtfElement {
+    +getRtfCode(): String
+}
+
+class HtmlToRtfParser {
+    -html: string
+    +parseHtml(): string 
+}
+
+class RtfStreamBuilder {
+    -header: RtfHeader
+    -documentArea: RtfDocumentArea
+    -footer: RtfFooter
+    +buildRtfStream(): String
+}
+
+class RtfHeader {
+    +getRtfCode(): String
+}
+
+class RtfDocumentArea {
+    +getRtfCode(): String
+}
+
+class RtfFooter {
+    +getRtfCode(): String
+}
+
+
+class RtfVersion {
+    +getRtfCode(): String
+}
+
+class Charset {
+    +getRtfCode(): String
+}
+
+class FontTable {
+    +getRtfCode(): String
+}
+
+class DocumentDefaults {
+    +getRtfCode(): String
+}
+
+RtfStreamBuilder *-- RtfHeader
+RtfStreamBuilder *-- RtfContent
+RtfStreamBuilder *-- RtfFooter
+
+RtfHeader *-- RtfVersion
+RtfHeader *-- Charset
+RtfHeader *-- FontTable
+RtfHeader *-- DocumentDefaults
+
+RtfComponent <|.. RtfHeader
+RtfComponent <|.. RtfDocumentArea
+RtfComponent <|.. RtfFooter
+
+RtfElement <|.. RtfVersion
+RtfElement <|.. Charset
+RtfElement <|.. FontTable
+RtfElement <|.. DocumentDefaults
+
+@enduml

@@ -40,11 +40,12 @@ console.log(rtfOutput);
 
 This code will generate an RTF string with the appropriate formatting and styling based on the input HTML string.
 
-The current implementation covers basic HTML tags (e.g., <b>, <i>, <u>, <p>, <ul>, and <li>) and CSS styling (e.g., color and font-size). The code is designed to be extensible, allowing for the addition of more HTML tags and CSS properties as needed.
+The current implementation covers basic HTML tags (e.g., ```<b>, <i>, <u>, <p>, <ul>, ```and``` <li>```) and CSS styling (e.g., color and font-size). The code is designed to be extensible, allowing for the addition of more HTML tags and CSS properties as needed.
 
-The code above adds support for table-related tags (<table>, <tr>, and <td>) and the width attribute on table cells.
+The code above adds support for table-related tags (```<table>, <tr>, ```and``` <td>```) and the width attribute on table cells.
 
 Here is an example of how to use the modified HtmlToRtfConverter class to convert an HTML table to an RTF table:
+
 ```typescript
 const inputHtml = `
   <table>
@@ -106,7 +107,6 @@ console.log(rtfOutput);
 
 The example above will highlight JavaScript keywords in blue. Keep in mind that this is a very basic example, and real-world syntax highlighters will be much more complex.
 
-
 ## RTF Specification
 Header:
   Start of File Tag
@@ -157,7 +157,6 @@ Content:
 
 Footer:
   End of File Tag
-
 
 Now we have a vision of where we are going, we shall now concentrate on the higher level design of our software components. We are going to follow the RTF specification and model classes using UML, so anyone can look at our diagrams and know what the road map for the RTF Builder is.
 
@@ -240,6 +239,7 @@ It will also have a ```build()``` method that combines all added elements into t
 
 With a clear UML diagram based on this design, developers can easily understand the structure and relationships between the components, making it easier to extend or modify the RTF Builder.
 
+```
 <header>
   \rtf <charset> \deff? <fonttbl> <filetbl>? <colortbl>? <stylesheet>? <listtables>? <revtbl>?
 
@@ -251,8 +251,12 @@ With a clear UML diagram based on this design, developers can easily understand 
  <header> composed of `\rtf` <charset> `\deff`?  <fonttbl> 
 <document> composed of  <dodfmt>* <section>+
 <footer> which is `}` termination of the rtf stream
+```
 
 Key to symbols:
+
+```
 a?	Item a is optional.
 a+	One or more repetitions of item a.
 a*	Zero or more repetitions of item a.
+```

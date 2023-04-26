@@ -5,6 +5,7 @@
 
   /src/classes/RtfInfoGroup.class.ts
 */
+import RtfComponent from '../interfaces/RtfComponent.interface';
 
 class RtfInfoGroup implements RtfComponent {
   // ... info group-related properties and methods

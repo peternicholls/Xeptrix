@@ -50,8 +50,13 @@ import * as Xeptrix from "xeptrix";
 2. Create an instance of the Xeptrix class and use its methods to convert HTML to RTF:
 
 ```typescript
-const xeptrix = new Xeptrix();
+// Get a HTML string from a file or other source
+const htmlString = '<p>Hello, World!</p>';
+// Create a new Xeptrix instance
+const xeptrix = new Xeptrix(htmlString);
 const rtfOutput = xeptrix('<p>Hello, World!</p>').convert();
+// Create a new document
+const rtfString = xeptrix.convert();
 ```
 
 ## **Development**

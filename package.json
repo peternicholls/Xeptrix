@@ -1,6 +1,6 @@
 {
   "name": "xeptrix",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "displayName": "Xeptrix - Document Format Converter",
   "description": "Document Format Converter for Javascript written in TypeScript",
   "keywords": [
@@ -25,7 +25,6 @@
   },
   "files": [
     "lib/**/*"
-
   ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

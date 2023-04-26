@@ -20,10 +20,10 @@ enum UnicodeControlWord {
   /**
    * The \ucN control word is used to specify the number of bytes in a Unicode
    * character. The default value is 1. The value of N must be 1 or 2.
-   */ 
+   */
   UnicodeSingleByte = '\\uc1',
   UnicodeDoubleByte = '\\uc2',
-  
+
   /**
    * The \uN control word is used to specify that the text following it is
    * to be treated as Unicode text. The text is to be translated into the
@@ -37,25 +37,25 @@ enum UnicodeControlWord {
    * The \ud control word is used to specify that the text following it is
    * to be treated as Unicode text. The text is to be translated into the
    * current ANSI code page, and the ANSI translation is to be used in the
-   * RTF output. A mixture of ANSI translation and use of \uN keywords to 
+   * RTF output. A mixture of ANSI translation and use of \uN keywords to
    * represent characters which do not have the exact ANSI equivalent.
-   */ 
-  UnicodeDestination = '\\ud', // 
-  
+   */
+  UnicodeDestination = '\\ud', //
+
   /**
    * The \upr control word is used to specify that the text following it is
    * to be treated as Unicode text. The text is to be translated into the
    * current ANSI code page, and the ANSI translation is to be used in the
-   * RTF output. 
-   * 
+   * RTF output.
+   *
    * eg: {\upr{keyword ansi_text}{\*\ud{keyword Unicode_text}}}
    */
   MixedUnicodeAnsi = '\\upr',
 
   /**
-   * The \fbidis is a flag written by RichEdit to indicate a single font is 
+   * The \fbidis is a flag written by RichEdit to indicate a single font is
    * active instead of a set of associated fonts.
-   * 
+   *
    * NOT IMPLEMENTED
    */
 }

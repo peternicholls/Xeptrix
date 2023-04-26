@@ -10,18 +10,18 @@
 /*
  * Unicode RTF Language Codes
  *
- * In RTF, use the \langthatnumber command with the appropriate language 
- * code to label a piece of text as a particular language; for example, 
+ * In RTF, use the \langthatnumber command with the appropriate language
+ * code to label a piece of text as a particular language; for example,
  * this paragraph in U.S. English (1033) contains a phrase in French (1036):
- * 
+ *
  * ```{\pard\lang1033 It had a certain```
  * ```{\i\lang1036 je ne sais quoi}.\par}```
- * 
- * This is a partial list of the most common language numbers. 
- * 
- * Note that the language values are in decimal (as used in RTF's \langthatnumber command). 
+ *
+ * This is a partial list of the most common language numbers.
+ *
+ * Note that the language values are in decimal (as used in RTF's \langthatnumber command).
  * In most Microsoft documentation, the values are (inconveniently) listed in hexadecimal.
- * 
+ *
  * https://www.oreilly.com/library/view/rtf-pocket-guide/9781449302047/ch04.html
  */
 enum Language {

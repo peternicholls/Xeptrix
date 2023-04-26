@@ -17,7 +17,6 @@ import { Sharp } from 'sharp';
 import fetch from 'node-fetch';
 import { JSDOM } from 'jsdom';
 
-
 class Xeptrix {
   private syntaxHighlighter: DefaultSyntaxHighlighter;
   private color: RtfColor;
@@ -66,7 +65,8 @@ class Xeptrix {
     return ``;
   }
 
-  private generateRtfHeader(): string { // This should be a constructor class
+  private generateRtfHeader(): string {
+    // This should be a constructor class
     const rtfVersion = `{\\rtf1`;
     const charset = `\\ansi`; // can this be made configurable?
     const unicodeUS = `\\ansicpg1252`;
@@ -135,8 +135,8 @@ class Xeptrix {
   }
 
   private handleSpaces(text: string): string {
-      // return text.replace(/ /g, '\\~');
-      return text;
+    // return text.replace(/ /g, '\\~');
+    return text;
   }
 
   private async processSvg(svgContent: string): Promise<string> {
@@ -270,8 +270,7 @@ class Xeptrix {
       if (styleCode) {
         styleCommands += styleCode;
       } else {
-        switch (key)
-        {
+        switch (key) {
           case 'font-size':
             styleCommands += this.font.getRtfFontSizeCode(value);
             break;

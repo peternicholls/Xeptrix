@@ -56,7 +56,7 @@ enum CharsetCodePage {
 
   SimplifiedChinese = 936,
   TraditionalChinese = 950,
-  
+
   Devanagari = 57002,
 
   EasternEuropean = 852,
@@ -94,7 +94,7 @@ enum CharsetCodePage {
 
   UnitedStatesIBM = 437,
   UnitedStatesWindows = 1252,
-  
+
   Vietnamese = 1258,
 }
 

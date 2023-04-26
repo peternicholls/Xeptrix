@@ -6,6 +6,8 @@
 
   /src/classes/elements/HeaderDocumentsDefault.class.ts
 */
+import RtfElement from '../interfaces/RtfElement.interface';
+import Language from '../enums/Language.enum';
 
 class HeaderDocumentDefaults implements RtfElement {
   defaultFont: number = 0;
@@ -20,3 +22,5 @@ class HeaderDocumentDefaults implements RtfElement {
     return `\\deff${this.defaultFont} \\deflang${this.defaultLanguage}`;
   }
 }
+
+export default HeaderDocumentDefaults;

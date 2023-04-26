@@ -1,0 +1,32 @@
+@startuml
+
+interface DocumentBuilder {
+    +buildHeader(): string
+    +buildDocument(): string
+}
+
+class RTFDocumentBuilder {
+    +buildHeader(): string
+    +buildDocument(): string
+}
+
+class LaTeXDocumentBuilder {
+    +buildHeader(): string
+    +buildDocument(): string
+}
+
+class MarkdownDocumentBuilder {
+    +buildHeader(): string
+    +buildDocument(): string
+}
+
+class DocumentBuilderFactory {
+    +createDocumentBuilder(format: string): DocumentBuilder
+}
+
+DocumentBuilder <|.. RTFDocumentBuilder
+DocumentBuilder <|.. LaTeXDocumentBuilder
+DocumentBuilder <|.. MarkdownDocumentBuilder
+DocumentBuilderFactory ..> DocumentBuilder : <<creates>>
+
+@enduml

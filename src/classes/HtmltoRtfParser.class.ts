@@ -4,14 +4,15 @@
   HtmltoRtfParser class
 
   /src/classes/HtmltoRtfParser.class.ts
+*/
+import SyntaxHighlighter from './interfaces/SyntaxHighlighter.interface';
 
-
-export class HtmlToRtfParser {
+class HtmlToRtfParser {
   constructor(private html: string, syntaxHighlighter?: SyntaxHighlighter) {
     // ...
   }
 
-  public processHtml(html: string = this.html, depth: number = 0): string {
+  public parse(html: string = this.html, depth: number = 0): string {
     // ...
   }
 
@@ -27,4 +28,5 @@ export class HtmlToRtfParser {
     // ...
   }
 }
-*/
+
+export default HtmlToRtfParser;

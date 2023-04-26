@@ -1,0 +1,76 @@
+@startuml
+
+class RTFHeader {
+    +build(): string
+}
+
+class CharacterSet {
+    +toString(): string
+}
+
+class UnicodeRTF {
+    +toString(): string
+}
+
+class FontTable {
+    +addFont(font: Font): void
+    +toString(): string
+}
+
+class DefaultFontsAndLanguages {
+    +toString(): string
+}
+
+class ThemeData {
+    +toString(): string
+}
+
+class FileTable {
+    +toString(): string
+}
+
+class ColorTable {
+    +addColor(color: Color): void
+    +toString(): string
+}
+
+class StyleSheet {
+    +addStyle(style: Style): void
+    +toString(): string
+}
+
+class ListTable {
+    +toString(): string
+}
+
+class ParagraphGroupProperties {
+    +toString(): string
+}
+
+class RevisionMarks {
+    +toString(): string
+}
+
+class UserProtection {
+    +toString(): string
+}
+
+class Generator {
+    +toString(): string
+}
+
+RTFHeader *-- CharacterSet
+RTFHeader *-- UnicodeRTF
+RTFHeader *-- FontTable
+RTFHeader *-- DefaultFontsAndLanguages
+RTFHeader *-- ThemeData
+RTFHeader *-- FileTable
+RTFHeader *-- ColorTable
+RTFHeader *-- StyleSheet
+RTFHeader *-- ListTable
+RTFHeader *-- ParagraphGroupProperties
+RTFHeader *-- RevisionMarks
+RTFHeader *-- UserProtection
+RTFHeader *-- Generator
+
+@enduml

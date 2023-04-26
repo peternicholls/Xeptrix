@@ -9,13 +9,13 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true
     },
-    "include": ["src"],
+    "include":  ["src", "Xeptrix.class.ts"],
     "exclude": 
     [
         "node_modules", 
         "**/__tests__/*", 
-        "**/components/*",
-        "**/elements/*",
-        "**/enums/*",
+        "**/components/*", // excluded as not in release build
+        "**/elements/*", // excluded as not in release build
+        "**/enums/*", // excluded as not in release build
     ]
 }

@@ -3,12 +3,14 @@
 
   RtfHeader component
 
-  /src/classes/RtfHeader.class.ts
+  /src/classes/components/RtfHeader.class.ts
 */
+import RtfComponent from '../interfaces/RtfComponent.interface';
 
 class RtfHeader implements RtfComponent {
   // ... header-related properties and methods
   toString(): string {
     // ... generate header string
+    return '';
   }
 }

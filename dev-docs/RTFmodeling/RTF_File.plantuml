@@ -1,0 +1,10 @@
+@startuml
+
+package File {
+    frame "{ }" {
+        rectangle header
+        rectangle document
+    }
+}
+
+@enduml

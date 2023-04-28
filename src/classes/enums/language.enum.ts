@@ -70,3 +70,5 @@ enum Language {
   Turkish = 1055,
   Vietnamese = 1066,
 }
+
+export default Language;

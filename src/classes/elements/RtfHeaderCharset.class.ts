@@ -7,10 +7,16 @@
   /src/classes/elements/HeaderCharset.class.ts
 */
 
-import { RtfElement } from './RtfElement.interface';
+import RtfElement from '../interfaces/RtfElement.interface';
 
-export class HeaderCharset implements RtfElement {
+class HeaderCharset implements RtfElement {
   generateRtfCode(): string {
     return '\\ansi';
   }
+
+  isNotEmpty(): boolean {
+    return false;
+  }
 }
+
+export default HeaderCharset;

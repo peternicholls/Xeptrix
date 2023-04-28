@@ -11,5 +11,8 @@ class RtfInfoGroup implements RtfComponent {
   // ... info group-related properties and methods
   toString(): string {
     // ... generate info group string
+    return '';
   }
 }
+
+export default RtfInfoGroup;

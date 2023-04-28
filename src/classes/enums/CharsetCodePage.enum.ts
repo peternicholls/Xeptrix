@@ -8,22 +8,22 @@
 
 /**
  * Unicode RTF Charset
- * 
+ *
  * @ControlWord `\ansicpgN` (where N is the code page number in the enumeration)
- * 
- * This keyword represents the ANSI code page that is used to perform the Unicode 
- * to ANSI conversion when writing RTF text. N represents the code page in decimal. 
- * This is typically set to the default ANSI code page of the run-time environment 
- * (for example `\ansicpg1252` for U.S. Windows). The reader can use the same ANSI 
- * code page to convert ANSI text back to Unicode. If it appears, this keyword 
- * should be emitted in the RTF header section right after the `\ansi`, `\mac`, 
+ *
+ * This keyword represents the ANSI code page that is used to perform the Unicode
+ * to ANSI conversion when writing RTF text. N represents the code page in decimal.
+ * This is typically set to the default ANSI code page of the run-time environment
+ * (for example `\ansicpg1252` for U.S. Windows). The reader can use the same ANSI
+ * code page to convert ANSI text back to Unicode. If it appears, this keyword
+ * should be emitted in the RTF header section right after the `\ansi`, `\mac`,
  * `\pc` or `\pea` keyword.
- * 
- * Note that runs of text marked with a particular font index (see `\fN` in the 
- * Font Table section) use the codepage for that font as given by `\cpgN` or 
- * implied by `\fcharsetN`, unless they use Unicode RTF described in the Unicode 
+ *
+ * Note that runs of text marked with a particular font index (see `\fN` in the
+ * Font Table section) use the codepage for that font as given by `\cpgN` or
+ * implied by `\fcharsetN`, unless they use Unicode RTF described in the Unicode
  * RTF section.
- * 
+ *
  * The following table lists the ANSI Charset pages that are supported by RTF.
  */
 enum CharsetCodePage {

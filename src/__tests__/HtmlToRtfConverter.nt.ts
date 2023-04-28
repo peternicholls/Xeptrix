@@ -1,6 +1,6 @@
 // HtmlToRtfConverter.test.ts - src/__tests__/HtmlToRtfConverter.test.ts
 
-import { HtmlToRtfConverter } from '../classes/Xeptrix.class';
+import HtmlToRtfConverter from '../classes/HtmlToRtfConverter.class';
 
 describe('HtmlToRtfConverter Class', () => {
   let htmlToRtfConverter: HtmlToRtfConverter;

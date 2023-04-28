@@ -10,7 +10,11 @@ import RtfComponent from '../interfaces/RtfComponent.interface';
 class RtfContent implements RtfComponent {
   // constructor(private htmlToRtfParser: HtmlToRtfParser) {}
 
-  toString(): string {
+  build(): string {
     // return this.htmlToRtfParser.processHtml();
+
+    return '';
   }
 }
+
+export default RtfContent;

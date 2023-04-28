@@ -1,17 +1,12 @@
 /**
  * @package: Xeptrix
- * @module: HtmlTagTransformer
- * @file: src/classes/HtmlTagTransformer.class.ts
+ * @module: HtmlTagToRtfTransformer
+ * @file: src/classes/HtmlTagToRtfTransformer.class.ts
  */
-import Xeptrix from './Xeptrix';
-import { HtmlTagsToRtfTable } from './modules/SupportedHtmlTags.module';
 
-export class HtmlTagTransformer {
-  private xeptrix: Xeptrix;
+import HtmlTagsToRtfTable from './modules/SupportedHtmlTags.module';
 
-  constructor(xeptrix: Xeptrix) {
-    this.xeptrix = xeptrix;
-  }
+export class HtmlTagToRtfTransformer {
 
   transformHtmlToRtf(html: string): string {
     let rtf = html;
@@ -19,15 +14,13 @@ export class HtmlTagTransformer {
     for (const entry of HtmlTagsToRtfTable) {
       const { htmlTag, openingRtf, closingRtf, defaultStyle, customHandler } = entry;
 
-      if (customHandler) {
-        rtf = customHandler(html, this.xeptrix.state);
-      } else {
+
         if (openingRtf) {
           rtf = rtf.replace(new RegExp(`<${htmlTag}>`, 'gi'), openingRtf + (defaultStyle || ''));
         }
         if (closingRtf) {
           rtf = rtf.replace(new RegExp(`</${htmlTag}>`, 'gi'), closingRtf);
-        }
+
       }
     }
 

@@ -7,5 +7,7 @@
 */
 
 interface RtfComponent {
-  toString(): string;
+  build(): string;
 }
+
+export default RtfComponent;

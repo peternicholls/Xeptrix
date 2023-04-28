@@ -11,5 +11,8 @@ class RtfFooter implements RtfComponent {
   // ... footer-related properties and methods
   toString(): string {
     // ... generate footer string
+    return '';
   }
 }
+
+export default RtfFooter;

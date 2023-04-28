@@ -11,15 +11,13 @@ import { RtfColor } from './RtfColor.class';
 import { RtfFont } from './RtfFont.class';
 import { RtfBorder } from './RtfBorder.class';
 import { RtfAlignment } from './RtfAlignment.class';
-import { RtfStyle } from './RtfStyle.class';
-import { HtmlTagTransformer } from './HtmlTagToRtfTransformer.class';
-import { HtmlTagsToRtfTable } from './modules/SupportedHtmlTags.module';
 
-class Xeptrix {
+
+class XeptrixOld {
   private color: RtfColor;
   private border: RtfBorder;
   private font: RtfFont;
-  public state: any; // You can replace 'any' with a more specific type if you have a defined shape for the state
+  public state: any;
 
 
   constructor(private html: string) {
@@ -27,7 +25,7 @@ class Xeptrix {
     this.color = new RtfColor();
     this.border = new RtfBorder(this.color);
     this.font = new RtfFont();
-    this.state = {}; // Initialize state as an empty object
+    this.state = {};
   }
 
   // ------------
@@ -50,7 +48,7 @@ class Xeptrix {
 
     const defaultFontSize = this.font.getDefaultFontSize(); // 12pt. Make this configurable
 
-    const rtfContent = this.processHtml(this.html);
+    const rtfContent = this.parseHtml(this.html);
     // {${info}}
     const document = `${contentSetup} ${defaultFontSize} ${rtfContent}`; // spaces are important!
 
@@ -95,9 +93,9 @@ class Xeptrix {
   // HTML Parsing
   // ------------
 
-  private processHtml(html: string, depth: number = 0): string {
+  private parseHtml(html: string): string {
     let rtfContent = '';
-
+    const depth = 0
     // In html, replace newlines and spaces with placeholders to preserve them
     html = html.replace(/\r?\n/g, '{newline}');
 
@@ -119,8 +117,8 @@ class Xeptrix {
           attributes[attrName] = attrValue.replace(/"/g, '');
         }
 
-        let rtfElement = this.processTag(tag, match[3], depth);
-        rtfElement = this.applyAttributesToRtf(rtfElement, attributes, depth);
+        let rtfElement = this.OLDprocessTag(tag, match[3], 0);
+        rtfElement = this.applyAttributesToRtf(rtfElement, attributes, 0);
         rtfContent += rtfElement;
       } else {
         rtfContent = this.handleSpaces(this.escapeRtfSpecialChars(part));
@@ -148,8 +146,38 @@ class Xeptrix {
     return '';
   }
 
-  private processTag(tag: string, content: string, depth: number): string {
-    const nestedContent = this.processHtml(content, depth + 1);
+  // convertHtmlToRtf(html: string): string {
+  //   // Parse the HTML string and convert it to RTF
+  //   // This example assumes you have a function `parseHtml` that takes an HTML string and returns an array of HTML elements
+  //   const htmlElements = this.parseHtml(html);
+  //   let rtfOutput = '';
+
+  //   for (const element of htmlElements) {
+  //     const entry = HtmlTagsToRtfTable.find((e: HtmlTagToRtfEntry) => e.htmlTag === element.tagName);
+
+  //     if (entry) {
+  //       if (entry.customHandler) {
+  //         rtfOutput += entry.customHandler(element, this.state);
+  //       } else {
+  //         if (entry.defaultStyle) {
+  //           rtfOutput += entry.defaultStyle;
+  //         }
+  //         if (entry.openingRtf) {
+  //           rtfOutput += entry.openingRtf;
+  //         }
+  //         rtfOutput += element.content; // Assuming 'content' property contains the text content of the element
+  //         if (entry.closingRtf) {
+  //           rtfOutput += entry.closingRtf;
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   return rtfOutput;
+  // }
+
+  private OLDprocessTag(tag: string, content: string, depth: number): string {
+    const nestedContent = this.parseHtml(content);
 
     switch (tag.toLowerCase()) {
       case 'b':
@@ -268,10 +296,6 @@ class Xeptrix {
     let styleCommands = '';
 
     for (const [key, value] of Object.entries(attributes)) {
-      const styleCode = RtfStyle.getRtfStyleCode(key, value);
-      if (styleCode) {
-        styleCommands += styleCode;
-      } else {
         switch (key) {
           case 'font-size':
             styleCommands += this.applyFontSize(value);
@@ -291,7 +315,6 @@ class Xeptrix {
           case 'border':
             styleCommands += this.applyBorder(value);
             break;
-        }
       }
     }
     return styleCommands + rtf;
@@ -336,4 +359,4 @@ class Xeptrix {
 
 }
 
-export default Xeptrix;
+export default XeptrixOld;

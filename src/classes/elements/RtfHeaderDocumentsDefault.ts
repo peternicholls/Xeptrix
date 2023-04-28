@@ -21,4 +21,10 @@ class HeaderDocumentDefaults implements RtfElement {
   generateRtfCode(): string {
     return `\\deff${this.defaultFont} \\deflang${this.defaultLanguage}`;
   }
+
+  isNotEmpty(): boolean {
+    return true;
+  }
 }
+
+export default HeaderDocumentDefaults;

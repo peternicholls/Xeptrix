@@ -21,7 +21,7 @@ type HtmlTagToRtfEntry = {
   customHandler?: (html: string, state: any) => string;
 };
 
-export const HtmlTagsToRtfTable: HtmlTagToRtfEntry[] = [
+const HtmlTagsToRtfTable: HtmlTagToRtfEntry[] = [
   /**
    * DOCUMENT TAGS
    */
@@ -225,3 +225,5 @@ export const HtmlTagsToRtfTable: HtmlTagToRtfEntry[] = [
     closingRtf: '}',
   },
 ];
+
+export default HtmlTagsToRtfTable;

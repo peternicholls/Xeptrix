@@ -22,6 +22,10 @@ class RtfColor implements RtfElement {
     this.addColor(this.getDefaultColor());
   }
 
+  isNotEmpty(): boolean {
+    return true;
+  }
+
   addColor(color: [number, number, number]): number {
     const colorKey = color.join(',');
 
@@ -40,10 +44,6 @@ class RtfColor implements RtfElement {
     );
     const colorDefinitionsString = colorDefinitions.join(';');
     return colorDefinitionsString.length > 0 ? `\\colortbl;${colorDefinitionsString};` : `\\colortbl;`;
-  }
-
-  isNotEmpty(): boolean {
-    return true;
   }
 
   parseColor(colorString: string): [number, number, number] {

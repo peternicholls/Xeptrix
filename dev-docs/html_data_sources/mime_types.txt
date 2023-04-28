@@ -1,0 +1,56 @@
+application/atom+xml
+Atom[ATOM]
+application/json
+JSON[JSON]
+application/octet-stream
+Generic binary data[RFC2046]
+application/microdata+json
+Microdata as JSON
+application/rss+xml
+RSS
+application/x-www-form-urlencoded
+Form submission
+application/xhtml+xml
+HTML
+application/xml
+XML[XML][RFC7303]
+image/gif
+GIF images[GIF]
+image/jpeg
+JPEG images[JPEG]
+image/png
+PNG images[PNG]
+image/svg+xml
+SVG images[SVG]
+multipart/form-data
+Form submission[RFC7578]
+multipart/mixed
+Generic mixed content[RFC2046]
+multipart/x-mixed-replace
+Streaming server push
+text/css
+CSS[CSS]
+text/event-stream
+Server-sent event streams
+text/javascript
+JavaScript[JAVASCRIPT][RFC9239]
+text/json
+JSON (legacy type)
+text/plain
+Generic plain text[RFC2046][RFC3676]
+text/html
+HTML
+text/ping
+Hyperlink auditing
+text/uri-list
+List of URLs[RFC2483]
+text/vcard
+vCard[RFC6350]
+text/vtt
+WebVTT[WEBVTT]
+text/xml
+XML[XML][RFC7303]
+video/mp4
+MPEG-4 video[RFC4337]
+video/mpeg
+MPEG video[RFC2046]	

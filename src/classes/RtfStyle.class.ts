@@ -1,10 +1,8 @@
-/*
-  Xeptrix - A library for converting HTML to RTF
-
-  RtfStyle class
-
-  /src/classes/RtfStyle.class.ts
-*/
+/**
+ * @package: Xeptrix
+ * @class: RtfStyle
+ * @file: src/classes/RtfStyle.class.ts
+ */
 import { styleReferenceList } from './RtfStyleReferenceList.module';
 
 export class RtfStyle {

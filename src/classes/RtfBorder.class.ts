@@ -1,10 +1,8 @@
-/*
-  Xeptrix - A library for converting HTML to RTF
-
-  RtfBorder class
-
-  /src/classes/RtfBorder.class.ts
-*/
+/**
+ * @package: Xeptrix
+ * @class: RtfBorder
+ * @file: src/classes/RtfBorder.class.ts
+ */
 import { RtfColor } from './RtfColor.class';
 
 export class RtfBorder {

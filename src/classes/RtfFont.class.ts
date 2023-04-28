@@ -1,10 +1,10 @@
-/*
-  Xeptrix - A library for converting HTML to RTF
-
-  RtfFont class
-
-  /src/classes/RtfFont.class.ts
-*/
+/**
+ * @package: Xeptrix
+ * @class: RtfFont
+ * @file: src/classes/RtfFont.class.ts
+ */
+const RTF_UNIT = 2; // 1pt = 2 RTF units
+const DECIMAL_RADIX = 10; // decimal base 10
 
 export class RtfFont {
   private fontTable: Map<string, { index: number; family: string }>;
@@ -41,7 +41,7 @@ export class RtfFont {
   }
 
   getRtfFontSizeCode(fontSize: string): string {
-    const size = parseInt(fontSize, 10) * 2;
+    const size = parseInt(fontSize, DECIMAL_RADIX) * RTF_UNIT; // 1pt = 2 RTF units
     return `\\fs${size}`;
   }
 

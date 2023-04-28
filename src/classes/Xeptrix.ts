@@ -1,27 +1,28 @@
-/*
-  Xeptrix- A library for converting HTML to RTF
+/**
+ * @package: Xeptrix
+ * @class: Xeptrix
+ * @file: src/classes/Xeptrix.ts
+ */
+const TWIPS_PER_PIXEL = 20; // 1/1440th of an inch
+const INDENT_PER_LEVEL = 720; // 1/2 inch
+const DECIMAL_RADIX = 10; // decimal base 10
 
-  Xeptrix class
-
-  /src/classes/Xeptrix.class.ts
-*/
 import { RtfColor } from './RtfColor.class';
 import { RtfFont } from './RtfFont.class';
 import { RtfBorder } from './RtfBorder.class';
 import { RtfAlignment } from './RtfAlignment.class';
 import { RtfStyle } from './RtfStyle.class';
 import DefaultSyntaxHighlighter from './DefaultSyntaxHighlighter.class';
-
-import fs from 'fs';
-import { Sharp } from 'sharp';
-import fetch from 'node-fetch';
-import { JSDOM } from 'jsdom';
+import { HtmlTagTransformer } from './HtmlTagTransformer.class';
+import { HtmlTagsToRtfTable } from './modules/SupportedHtmlTags.module';
 
 class Xeptrix {
   private syntaxHighlighter: DefaultSyntaxHighlighter;
   private color: RtfColor;
   private border: RtfBorder;
   private font: RtfFont;
+  public state: any; // You can replace 'any' with a more specific type if you have a defined shape for the state
+
 
   constructor(private html: string, syntaxHighlighter?: DefaultSyntaxHighlighter) {
     this.syntaxHighlighter = syntaxHighlighter || new DefaultSyntaxHighlighter(); // implement better highlighting with selectors
@@ -29,6 +30,7 @@ class Xeptrix {
     this.color = new RtfColor();
     this.border = new RtfBorder(this.color);
     this.font = new RtfFont();
+    this.state = {}; // Initialize state as an empty object
   }
 
   // ------------
@@ -223,18 +225,19 @@ class Xeptrix {
     rtf = this.applyLinkAttributesToRtf(rtf, attributes);
     rtf = this.applyStyleAttributesToRtf(rtf, attributes);
     rtf = this.applyListAttributesToRtf(rtf, attributes, depth);
-
     return rtf;
   }
 
   private applyWidthAttributeToRtf(rtf: string, attrName: string, attrValue: string): string {
     if (attrName.toLowerCase() === 'width') {
-      const width = parseInt(attrValue, 10);
+      const width = parseInt(attrValue, DECIMAL_RADIX);
       if (!isNaN(width)) {
-        rtf = `\\cellx${width * 20} ${rtf}`; // Assumes a default ratio of 20 twips per pixel
+        // Assumes a default ratio of 20 twips per pixel
+        const twipsWidth = width * TWIPS_PER_PIXEL;
+        // Use the appropriate RTF command to apply the width. In this example, we'll use the cell width command.
+        rtf = `\\cellx${twipsWidth} ${rtf}`;
       }
     }
-
     return rtf;
   }
 
@@ -244,7 +247,6 @@ class Xeptrix {
       const escapedHref = this.escapeRtfSpecialChars(href);
       rtf = `\\field{\\*\\fldinst HYPERLINK "${escapedHref}"}{\\fldrslt\\ul ${rtf}}\\ulnone `;
     }
-
     return rtf;
   }
 
@@ -252,15 +254,19 @@ class Xeptrix {
     const listType = attributes['data-list-type'];
     if (listType) {
       const isOrdered = listType === 'ol';
+      const listIndent = INDENT_PER_LEVEL * depth;
       if (isOrdered) {
-        rtf = `\\fi-360\\li${720 * depth} \\ilvl${depth - 1}\\i\\fs20 ${rtf}`;
+        rtf = `\\fi-360\\li${listIndent} \\ilvl${depth - 1}\\i\\fs20 ${rtf}`;
       } else {
-        rtf = `\\fi-360\\li${720 * depth} \\bullet\\fs20 ${rtf}`;
+        rtf = `\\fi-360\\li${listIndent} \\bullet\\fs20 ${rtf}`;
       }
     }
-
+    if (attributes.width) {
+      rtf = this.applyWidthAttributeToRtf(rtf, 'width', attributes.width);
+    }
     return rtf;
   }
+
 
   private applyStyleAttributesToRtf(rtf: string, attributes: Record<string, string>): string {
     let styleCommands = '';
@@ -272,43 +278,66 @@ class Xeptrix {
       } else {
         switch (key) {
           case 'font-size':
-            styleCommands += this.font.getRtfFontSizeCode(value);
+            styleCommands += this.applyFontSize(value);
             break;
           case 'font-family':
-            styleCommands += this.font.getRtfFontFamilyCode(value);
+            styleCommands += this.applyFontFamily(value);
             break;
           case 'text-align':
-            styleCommands += RtfAlignment.getRtfAlignmentCode(value) ?? '';
+            styleCommands += this.applyTextAlignment(value);
             break;
           case 'color':
-            const colorComponents = this.color.parseColor(value);
-            if (colorComponents) {
-              const [r, g, b] = colorComponents;
-              const colorIndex = this.color.addColor([r, g, b]);
-              styleCommands += `\\cf${colorIndex} `;
-            }
+            styleCommands += this.applyTextColor(value);
             break;
           case 'background-color':
-            const bgColorComponents = this.color.parseColor(value);
-            if (bgColorComponents) {
-              const [r, g, b] = bgColorComponents;
-              const bgColorIndex = this.color.addColor([r, g, b]);
-              styleCommands += `\\highlight${bgColorIndex} `;
-            }
+            styleCommands += this.applyBackgroundColor(value);
             break;
           case 'border':
-            // You'll need to implement a method to handle border styles and add the appropriate RTF commands
-            const borderCommands = this.border.getBorderCommands(value);
-            if (borderCommands) {
-              styleCommands += borderCommands;
-            }
+            styleCommands += this.applyBorder(value);
             break;
         }
       }
     }
-
     return styleCommands + rtf;
   }
+
+  private applyFontSize(fontSize: string): string {
+    return this.font.getRtfFontSizeCode(fontSize);
+  }
+
+  private applyFontFamily(fontFamily: string): string {
+    return this.font.getRtfFontFamilyCode(fontFamily);
+  }
+
+  private applyTextAlignment(alignment: string): string {
+    return RtfAlignment.getRtfAlignmentCode(alignment) ?? '';
+  }
+
+  private applyTextColor(colorString: string): string {
+    const colorComponents = this.color.parseColor(colorString);
+    if (colorComponents) {
+      const [r, g, b] = colorComponents;
+      const colorIndex = this.color.addColor([r, g, b]);
+      return `\\cf${colorIndex} `;
+    }
+    return '';
+  }
+
+  private applyBackgroundColor(colorString: string): string {
+    const bgColorComponents = this.color.parseColor(colorString);
+    if (bgColorComponents) {
+      const [r, g, b] = bgColorComponents;
+      const bgColorIndex = this.color.addColor([r, g, b]);
+      return `\\highlight${bgColorIndex} `;
+    }
+    return '';
+  }
+
+  private applyBorder(border: string): string {
+    const borderCommands = this.border.getBorderCommands(border);
+    return borderCommands ?? '';
+  }
+
 }
 
 export default Xeptrix;

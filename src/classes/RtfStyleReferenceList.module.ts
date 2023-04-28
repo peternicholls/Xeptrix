@@ -1,11 +1,8 @@
-/*
-  Xeptrix - A library for converting HTML to RTF
-
-  RtfStyleReferenceList class
-
-  /src/classes/RtfStyleReferenceList.module.ts
-*/
-
+/**
+ * @package: Xeptrix
+ * @class: RtfStyleReferenceList
+ * @file: src/classes/RtfStyleReferenceList.module.ts
+ */
 type StyleReference = {
   [key: string]: string;
 };

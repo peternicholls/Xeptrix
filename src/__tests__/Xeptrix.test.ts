@@ -18,7 +18,7 @@ describe('HtmlToRtfConverter Class', () => {
   });
 
   test('should output paragraph', () => {
-    const html = '<p>Hello, World!</p>';
+    const html = `<p>Hello, World!</p>`;
     const rtf = new Xeptrix(html).convert();
     const expected = 'Hello, World!';
     expect(rtf).toBe(
@@ -26,3 +26,5 @@ describe('HtmlToRtfConverter Class', () => {
     );
   });
 });
+
+// HtmlToRtfConverter.test.ts - src/__tests__/HtmlToRtfConverter.test.ts

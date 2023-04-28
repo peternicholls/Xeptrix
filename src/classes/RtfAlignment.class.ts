@@ -1,10 +1,8 @@
-/*
-  Xeptrix - A library for converting HTML to RTF
-
-  RtfAlignment class
-
-  /src/classes/RtfAlignment.class.ts
-*/
+/**
+ * @package: Xeptrix
+ * @class: RtfAlignment
+ * @file: src/classes/RtfAlignment.class.ts
+ */
 interface AlignmentReference {
   name: string;
   reference: string;

@@ -1,0 +1,178 @@
+Attribute	Element	DescriptionValue			
+abbr	th	Alternative label to use for the header cell when referencing the cell in other contexts	Text			
+accept	input	Hint for expected file type infile upload controls	"Set of comma-separated tokens consisting ofvalid MIME type strings with no parametersoraudio/,video/, orimage/"			
+accept-charset	form	Character encodings to use forform submission	"ASCII case-insensitivematch for "UTF-8"			
+accesskey	HTML elements	Keyboard shortcut to activate or focus element	"Ordered set of unique space-separated tokens, none of which areidentical toanother, each consisting of one code point in length"			
+action	form	URLto use forform submission	Valid non-empty URL potentially surrounded by spaces			
+allow	iframe	Permissions policyto be applied to theiframe's contents	Serialized permissions policy			
+allowfullscreen	iframe	Whether to allow theiframe's contents to userequestFullscreen()	Boolean attribute			
+alt	area;img;input	Replacement text for use when images are not available	Text			
+as	link	"Potential destinationfor a preload request (forrel="preload" andrel="modulepreload")"	"Potential destination, forrel="preload";script-like destination, forrel="modulepreload"			
+async	script	"Execute script when available, without blocking while fetching"	Boolean attribute			
+autocapitalize	HTML elements	Recommended autocapitalization behavior (for supported input methods)	"on"; "off"; "none"; "sentences"; "words"; "characters"			
+autocomplete	form	Default setting for autofill feature for controls in the form	"on"; "off"			
+autocomplete	input;select;textarea	Hint for form autofill feature	Autofill fieldname and related tokens			
+autofocus	HTML elements	Automatically focus the element when the page is loaded	Boolean attribute			
+autoplay	audio;video	Hint that themedia resourcecan be started automatically when the page is loaded	Boolean attribute			
+blocking	link;script;style	Whether the element ispotentially render-blocking	Unordered set of unique space-separated tokens			
+charset	meta	Character encoding declaration	"utf-8"			
+checked	input	Whether the control is checked	Boolean attribute			
+cite	blockquote;del;ins;q	Link to the source of the quotation or more information about the edit	Valid URL potentially surrounded by spaces			
+class	HTML elements	Classes to which the element belongs	Set of space-separated tokens			
+color	link	"Color to use when customizing a site's icon (forrel="mask-icon")"	CSS<color>			
+cols	textarea	Maximum number of characters per line	Valid non-negative integergreater than zero			
+colspan	td;th	Number of columns that the cell is to span	Valid non-negative integergreater than zero			
+content	meta	Value of the element	Text			
+contenteditable	HTML elements	Whether the element is editable	"true"; "plaintext-only"; "false"			
+controls	audio;video	Show user agent controls	Boolean attribute			
+coords	area	Coordinates for the shape to be created in animage map	Valid list of floating-point numbers			
+crossorigin	audio;img;link;script;video	How the element handles crossorigin requests	"anonymous"; "use-credentials"			
+data	object	Address of the resource	Valid non-empty URL potentially surrounded by spaces			
+datetime	del;ins	Date and (optionally) time of the change	Valid date string with optional time			
+datetime	time	Machine-readable value	"Valid month string,valid date string,valid yearless date string,valid time string,valid local date and time string,valid time-zone offset string,valid global date and time string,valid week string,valid non-negative integer, orvalid duration string"			
+decoding	img	Decoding hint to use when processing this image for presentation	"sync"; "async"; "auto"			
+default	track	Enable the track if no othertext trackis more suitable	Boolean attribute			
+defer	script	Defer script execution	Boolean attribute			
+dir	HTML elements	The text directionalityof the element	"ltr"; "rtl"; "auto"			
+dir	bdo	The text directionalityof the element	"ltr"; "rtl"			
+dirname	input;textarea	Name of form control to use for sending the element'sdirectionalityinform submission	Text			
+disabled	button;input;optgroup;option;select;textarea;form-associated custom elements	Whether the form control is disabled	Boolean attribute			
+disabled	fieldset	"Whether the descendant form controls, except any insidelegend, are disabled"	Boolean attribute			
+disabled	link	Whether the link is disabled	Boolean attribute			
+download	a;area	"Whether to download the resource instead of navigating to it, and its filename if so"	Text			
+draggable	HTML elements	Whether the element is draggable	"true"; "false"			
+enctype	form	Entry listencoding type to use forform submission	"application/x-www-form-urlencoded"; "multipart/form-data"; "text/plain"			
+enterkeyhint	HTML elements	Hint for selecting an enter key action	"enter"; "done"; "go"; "next"; "previous"; "search"; "send"			
+fetchpriority	img;link;script	Sets thepriorityforfetchesinitiated by the element	"auto"; "high"; "low"			
+for	label	Associate the label with form control	ID			
+for	output	Specifies controls from which the output was calculated	Unordered set of unique space-separated tokensconsisting of IDs			
+form	button;fieldset;input;object;output;select;textarea;form-associated custom elements	Associates the element with aformelement	ID			
+formaction	button;input	URLto use forform submission	Valid non-empty URL potentially surrounded by spaces			
+formenctype	button;input	Entry listencoding type to use forform submission	"application/x-www-form-urlencoded"; "multipart/form-data"; "text/plain"			
+formmethod	button;input	Variant to use forform submission	"GET"; "POST"; "dialog"			
+formnovalidate	button;input	Bypass form control validation forform submission	Boolean attribute			
+formtarget	button;input	Navigableforform submission	Valid navigable target name or keyword			
+headers	td;th	The header cells for this cell	Unordered set of unique space-separated tokensconsisting of IDs			
+height	canvas;embed;iframe;img;input;object;source(inpicture);video	Vertical dimension	Valid non-negative integer			
+hidden	HTML elements	Whether the element is relevant	"until-found"; "hidden"; the empty string"			
+high	meter	Low limit of high range	Valid floating-point number			
+href	a;area	Address of thehyperlink	Valid URL potentially surrounded by spaces			
+href	link	Address of thehyperlink	Valid non-empty URL potentially surrounded by spaces			
+href	base	Document base URL	Valid URL potentially surrounded by spaces			
+hreflang	a;link	Language of the linked resource	Valid BCP 47 language tag			
+http-equiv	meta	Pragma directive	"content-type"; "default-style"; "refresh"; "x-ua-compatible"; "content-security-policy"			
+id	HTML elements	The element'sID	Text			
+imagesizes	link	"Image sizes for different page layouts (forrel="preload")"	Valid source size list			
+imagesrcset	link	"Images to use in different situations, e.g., high-resolution displays, small monitors, etc. (forrel="preload")"	Comma-separated list ofimage candidate strings			
+inert	HTML elements	Whether the element isinert.	Boolean attribute			
+inputmode	HTML elements	Hint for selecting an input modality	"none"; "text"; "tel"; "email"; "url"; "numeric"; "decimal"; "search"			
+integrity	link;script	Integrity metadata used inSubresource Integritychecks[SRI]	Text			
+is	HTML elements	Creates acustomized built-in element	Valid custom element nameof a definedcustomized built-in element			
+ismap	img	Whether the image is a server-side image map	Boolean attribute			
+itemid	HTML elements	Global identifierfor a microdata item	Valid URL potentially surrounded by spaces			
+itemprop	HTML elements	Property namesof a microdata item	"Unordered set of unique space-separated tokensconsisting ofvalid absolute URLs,defined property names, or text"			
+itemref	HTML elements	Referencedelements	Unordered set of unique space-separated tokensconsisting of IDs			
+itemscope	HTML elements	Introduces a microdata item	Boolean attribute			
+itemtype	HTML elements	Item typesof a microdata item	Unordered set of unique space-separated tokensconsisting ofvalid absolute URLs			
+kind	track	The type of text track	"subtitles"; "captions"; "descriptions"; "chapters"; "metadata"			
+label	optgroup;option;track	User-visible label	Text			
+lang	HTML elements	Languageof the element	Valid BCP 47 language tag or the empty string			
+list	input	List of autocomplete options	ID			
+loading	iframe;img	Used when determining loading deferral	"lazy"; "eager"			
+loop	audio;video	Whether to loop themedia resource	Boolean attribute			
+low	meter	High limit of low range	Valid floating-point number			
+max	input	Maximum value	Varies			
+max	meter;progress	Upper bound of range	Valid floating-point number			
+maxlength	input;textarea	Maximumlengthof value	Valid non-negative integer			
+media	link;meta;source(inpicture);style	Applicable media	Valid media query list			
+method	form	Variant to use forform submission	"GET"; "POST"; "dialog"			
+min	input	Minimum value	Varies			
+min	meter	Lower bound of range	Valid floating-point number			
+minlength	input;textarea	Minimumlengthof value	Valid non-negative integer			
+multiple	input;select	Whether to allow multiple values	Boolean attribute			
+muted	audio;video	Whether to mute themedia resourceby default	Boolean attribute			
+name	button;fieldset;input;output;select;textarea;form-associated custom elements	Name of the element to use forform submissionand in theform.elementsAPI	Text			
+name	form	Name of form to use in thedocument.formsAPI	Text			
+name	iframe;object	Name ofcontent navigable	Valid navigable target name or keyword			
+name	map	Name ofimage maptoreferencefrom theusemapattribute	Text			
+name	meta	Metadata name	Text			
+name	slot	Name of shadow tree slot	Text			
+nomodule	script	Prevents execution in user agents that supportmodule scripts	Boolean attribute			
+nonce	HTML elements	Cryptographic nonce used inContent Security Policychecks[CSP]	Text			
+novalidate	form	Bypass form control validation forform submission	Boolean attribute			
+open	details	Whether the details are visible	Boolean attribute			
+open	dialog	Whether the dialog box is showing	Boolean attribute			
+optimum	meter	Optimum value in gauge	Valid floating-point number			
+pattern	input	Pattern to be matched by the form control's value	Regular expression matching the JavaScriptPatternproduction			
+ping	a;area	URLsto ping	Set of space-separated tokensconsisting ofvalid non-empty URLs			
+placeholder	input;textarea	User-visible label to be placed within the form control	Text			
+playsinline	video	Encourage the user agent to display video content within the element's playback area	Boolean attribute			
+popover	HTML elements	Makes the element apopoverelement	"auto"; "manual";"			
+popovertarget	input;button	"Targets a popover element to toggle, show, or hide"	"ID of the element to toggle, show or, hide"			
+popovertargetaction	input;button	"Indicates whether a targeted popover element is to be toggled, shown, or hidden"	"toggle"; "show"; "hide"			
+poster	video	Poster frame to show prior to video playback	Valid non-empty URL potentially surrounded by spaces			
+preload	audio;video	Hints how much buffering themedia resourcewill likely need	"none"; "metadata"; "auto"			
+readonly	input;textarea	Whether to allow the value to be edited by the user	Boolean attribute			
+readonly	form-associated custom elements	"AffectswillValidate, plus any behavior added by the custom element author"	Boolean attribute			
+referrerpolicy	a;area;iframe;img;link;script	Referrer policyforfetchesinitiated by the element	Referrer policy			
+rel	a;area	Relationship between the location in the document containing thehyperlinkand the destination resource	Unordered set of unique space-separated tokens			
+rel	link	Relationship between the document containing thehyperlinkand the destination resource	Unordered set of unique space-separated tokens			
+required	input;select;textarea	Whether the control is required forform submission	Boolean attribute			
+reversed	ol	Number the list backwards	Boolean attribute			
+rows	textarea	Number of lines to show	Valid non-negative integergreater than zero			
+rowspan	td;th	Number of rows that the cell is to span	Valid non-negative integer			
+sandbox	iframe	Security rules for nested content	"Unordered set of unique space-separated tokens,ASCII case-insensitive, consisting of"			
+      "allow-downloads"			
+      "allow-forms"			
+      "allow-modals"			
+      "allow-orientation-lock"			
+      "allow-pointer-lock"			
+      "allow-popups"			
+      "allow-popups-to-escape-sandbox"			
+      "allow-presentation"			
+      "allow-same-origin"			
+      "allow-scripts"			
+      "allow-top-navigation"			
+      "allow-top-navigation-by-user-activation"			
+      "allow-top-navigation-to-custom-protocols"			
+						
+scope	th	Specifies which cells the header cell applies to	"row"; "col"; "rowgroup"; "colgroup"			
+selected	option	Whether the option is selected by default	Boolean attribute			
+shape	area	The kind of shape to be created in animage map	"circle"; "default"; "poly"; "rect"			
+size	input;select	Size of the control	Valid non-negative integergreater than zero			
+sizes	link	"Sizes of the icons (forrel="icon")"	"Unordered set of unique space-separated tokens,ASCII case-insensitive, consisting of sizes"			
+sizes	img;source	Image sizes for different page layouts	Valid source size list			
+slot	HTML elements	The element's desired slot	Text			
+span	col;colgroup	Number of columns spanned by the element	Valid non-negative integergreater than zero			
+spellcheck	HTML elements	Whether the element is to have its spelling and grammar checked	"true"; "false"			
+src	audio;embed;iframe;img;input;script;source(invideooraudio);track;video	Address of the resource	Valid non-empty URL potentially surrounded by spaces			
+srcdoc	iframe	A document to render in theiframe	The source ofaniframesrcdocdocument			
+srclang	track	Language of the text track	Valid BCP 47 language tag			
+srcset	img;source	"Images to use in different situations, e.g., high-resolution displays, small monitors, etc."	Comma-separated list ofimage candidate strings			
+start	ol	Starting valueof the list	Valid integer			
+step	input	Granularity to be matched by the form control's value	"Valid floating-point numbergreater than zero, or "any"			
+style	HTML elements	Presentational and formatting instructions	CSS declarations			
+tabindex	HTML elements	"Whether the element isfocusableandsequentially focusable, and the relative order of the element for the purposes ofsequential focus navigation"	Valid integer			
+target	a;area	Navigableforhyperlinknavigation	Valid navigable target name or keyword			
+target	base	Defaultnavigableforhyperlinknavigationandform submission	Valid navigable target name or keyword			
+target	form	Navigableforform submission	Valid navigable target name or keyword			
+title	HTML elements	Advisory information for the element	Text			
+title	abbr;dfn	Full term or expansion of abbreviation	Text			
+title	input	Description of pattern (when used withpatternattribute)	Text			
+title	link	Title of the link	Text			
+title	link;style	CSS style sheet set name	Text			
+translate	HTML elements	Whether the element is to be translated when the page is localized	"yes"; "no"			
+type	a;link	Hint for the type of the referenced resource	Valid MIME type string			
+type	button	Type of button	"submit"; "reset"; "button"			
+type	embed;object;source	Type of embedded resource	Valid MIME type string			
+type	input	Type of form control	inputtype keyword			
+type	ol	Kind of list marker	"1"; "a"; "A"; "i"; "I"			
+type	script	Type of script	"module"; avalid MIME type stringthat is not aJavaScript MIME type essence match"			
+usemap	img	Name ofimage mapto use	Valid hash-name reference			
+value	button;option	Value to be used forform submission	Text			
+value	data	Machine-readable value	Text			
+value	input	Value of the form control	Varies			
+value	li	Ordinal valueof the list item	Valid integer			
+value	meter;progress	Current value of the element	Valid floating-point number			
+width	canvas;embed;iframe;img;input;object;source(inpicture);video	Horizontal dimension	Valid non-negative integer			
+wrap	textarea	How the value of the form control is to be wrapped forform submission	"soft"; "hard"							

@@ -1,10 +1,10 @@
 /**
  * @package: Xeptrix
  * @module: HTML Elements
- * @file: src/classes/html_types/html_elements.ts
+ * @file: src/classes/html_types/HtmlElementData.ts
  */
 
-type HtmlElement = {
+type HtmlElementData = {
   element: string;
   description: string;
   category: string;
@@ -14,7 +14,7 @@ type HtmlElement = {
   interface: string;
 };
 
-export const HtmlElement: HtmlElement[] = [
+export const HtmlElementData: HtmlElementData[] = [
   {
     element: 'a',
     description: 'Hyperlink',

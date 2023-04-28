@@ -1,7 +1,7 @@
 /**
  * @package: Xeptrix
  * @module: HTML Attributes
- * @file: src/classes/html_types/html_attributes.ts
+ * @file: src/classes/html_types/HtmlAttribute.ts
  */
 
 type HtmlAttribute = {

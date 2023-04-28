@@ -1,7 +1,7 @@
 /**
  * @package: Xeptrix
  * @module: HTML Element Interfaces
- * @file: src/classes/html_types/html_element_interfaces.ts
+ * @file: src/classes/html_types/HtmlElementInterfaces.ts
  */
 
 type HtmlElementInterface = {

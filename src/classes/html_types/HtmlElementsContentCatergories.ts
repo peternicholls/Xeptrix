@@ -1,7 +1,7 @@
 /**
  * @package: Xeptrix
  * @module: HTML Elements Content Catergories
- * @file: src/classes/html_types/html_elements_content_catergories.ts
+ * @file: src/classes/html_types/HtmlElementContentCategories.ts
  */
 
 type HtmlElementContentCatergory = {

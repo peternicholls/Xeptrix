@@ -4,6 +4,9 @@ dependencies:
   '@types/jsdom':
     specifier: ^21.1.1
     version: 21.1.1
+  ascii-table3:
+    specifier: ^0.8.2
+    version: 0.8.2
   jsdom:
     specifier: ^21.1.1
     version: 21.1.1
@@ -1575,6 +1578,13 @@ packages:
       es-abstract: 1.21.2
       es-shim-unscopables: 1.0.0
     dev: true
+
+  /ascii-table3@0.8.2:
+    resolution: {integrity: sha512-L6J5Gcn3hmprVhSY7jVel0cXVo9l37s8UW4UHGoPhWiaOLCcfJ0YBRuO2QpgKnVGulZj8oSVnYZQQA5NWJr6Tg==}
+    engines: {node: '>=11.14.0'}
+    dependencies:
+      printable-characters: 1.0.42
+    dev: false
 
   /async-array-reduce@0.2.1:
     resolution: {integrity: sha512-/ywTADOcaEnwiAnOEi0UB/rAcIq5bTFfCV9euv3jLYFUMmy6KvKccTQUnLlp8Ensmfj43wHSmbGiPqjsZ6RhNA==}
@@ -5070,6 +5080,10 @@ packages:
       ansi-styles: 5.2.0
       react-is: 18.2.0
     dev: true
+
+  /printable-characters@1.0.42:
+    resolution: {integrity: sha512-dKp+C4iXWK4vVYZmYSd0KBH5F/h1HoZRsbJ82AVKRO3PEo8L4lBS/vLwhVtpwwuYcoIsVY+1JYKR268yn480uQ==}
+    dev: false
 
   /process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}

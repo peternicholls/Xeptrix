@@ -12,7 +12,7 @@ import { RtfFont } from './RtfFont.class';
 import { RtfBorder } from './RtfBorder.class';
 import { RtfAlignment } from './RtfAlignment.class';
 import { RtfStyle } from './RtfStyle.class';
-import { HtmlTagTransformer } from './HtmlTagTransformer.class';
+import { HtmlTagTransformer } from './HtmlTagToRtfTransformer.class';
 import { HtmlTagsToRtfTable } from './modules/SupportedHtmlTags.module';
 
 class Xeptrix {

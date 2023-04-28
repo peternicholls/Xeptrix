@@ -12,20 +12,17 @@ import { RtfFont } from './RtfFont.class';
 import { RtfBorder } from './RtfBorder.class';
 import { RtfAlignment } from './RtfAlignment.class';
 import { RtfStyle } from './RtfStyle.class';
-import DefaultSyntaxHighlighter from './DefaultSyntaxHighlighter.class';
 import { HtmlTagTransformer } from './HtmlTagTransformer.class';
 import { HtmlTagsToRtfTable } from './modules/SupportedHtmlTags.module';
 
 class Xeptrix {
-  private syntaxHighlighter: DefaultSyntaxHighlighter;
   private color: RtfColor;
   private border: RtfBorder;
   private font: RtfFont;
   public state: any; // You can replace 'any' with a more specific type if you have a defined shape for the state
 
 
-  constructor(private html: string, syntaxHighlighter?: DefaultSyntaxHighlighter) {
-    this.syntaxHighlighter = syntaxHighlighter || new DefaultSyntaxHighlighter(); // implement better highlighting with selectors
+  constructor(private html: string) {
     this.html = html;
     this.color = new RtfColor();
     this.border = new RtfBorder(this.color);
@@ -176,8 +173,7 @@ class Xeptrix {
       case 'td':
         return `\\pard\\intbl ${nestedContent} \\cell`;
       case 'pre':
-        const highlightedContent = this.syntaxHighlighter.highlight(content);
-        const rtfEscapedContent = this.escapeRtfSpecialChars(highlightedContent);
+        const rtfEscapedContent = this.escapeRtfSpecialChars(content);
         return `\\pard\\nowidctlpar\\fi720\\f1\\fs20 ${rtfEscapedContent} \\pard\\fi0\\f0\\fs24`;
       case 'strong':
         return `\\b ${nestedContent}\\b0 `;

@@ -58,7 +58,7 @@ describe('HtmlToRtfParser v1 coverage', () => {
       '<p style="font-size: 16px; font-family: Georgia, serif; color: rgb(300, 10, 20); background-color: #0f0; text-align: center">Styled</p><span style="color: not-a-color">Plain</span>',
     );
 
-    expect(rtf).toContain('\\f1\\ Georgia;');
+    expect(rtf).toContain('\\f1\\fnil Georgia;');
     expect(rtf).toContain('\\red255\\green10\\blue20;');
     expect(rtf).toContain('\\red0\\green255\\blue0;');
     expect(rtf).toContain('\\fs24 \\f1 \\cf1 \\highlight2 \\qc Styled\\highlight0 \\cf0 \\f0 \\fs24');

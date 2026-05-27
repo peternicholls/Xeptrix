@@ -18,7 +18,7 @@ export class RtfFont {
     this.addFont('Arial', 'fswiss');
   }
 
-  addFont(fontName: string, fontFamilyDescriptor: string = ''): number {
+  addFont(fontName: string, fontFamilyDescriptor: string = 'fnil'): number {
     if (this.fontTable.has(fontName)) {
       return this.fontTable.get(fontName)!.index;
     }

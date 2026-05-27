@@ -14,6 +14,8 @@ const DEFAULT_FONT_SIZE = 24;
 const INDENT_PER_LEVEL = 720;
 const HEX_RADIX = 16;
 const DECIMAL_RADIX = 10;
+const PX_TO_HALF_POINTS = 1.5;
+const PT_TO_HALF_POINTS = 2;
 
 type ListContext = {
   depth: number;
@@ -139,7 +141,9 @@ class HtmlToRtfParser {
       case 'sup':
         return `{\\super ${styledContent}\\nosupersub}`;
       case 'pre':
-        return `\\pard\\f1\\fs20 ${this.escapeRtfSpecialChars(element.textContent || '')}\\f0\\fs${DEFAULT_FONT_SIZE}\\par `;
+        return `\\pard\\f${this.getMonospaceFontIndex()}\\fs20 ${this.escapeRtfSpecialChars(
+          element.textContent || '',
+        )}\\f0\\fs${DEFAULT_FONT_SIZE}\\par `;
       case 'code':
         return `{\\f1 ${styledContent}}`;
       case 'blockquote':
@@ -328,7 +332,11 @@ class HtmlToRtfParser {
       return DEFAULT_FONT_SIZE;
     }
 
-    return Math.round(size.toLowerCase().indexOf('px') !== -1 ? numericSize * 1.5 : numericSize * 2);
+    return Math.round(size.toLowerCase().indexOf('px') !== -1 ? numericSize * PX_TO_HALF_POINTS : numericSize * PT_TO_HALF_POINTS);
+  }
+
+  private getMonospaceFontIndex(): number {
+    return this.font.addFont('Courier New', 'fmodern');
   }
 
   private cleanFontFamily(fontFamily: string): string {

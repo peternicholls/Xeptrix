@@ -10,7 +10,7 @@
  *        builder via methods such as `convertHtmlToRtf` etc.
  */
 
-import HtmlToRtfParser from './classes/HtmltoRtfParser.class';
+import HtmlToRtfParser from './classes/HtmlToRtfParser.class';
 
 class Xeptrix {
   private html: string;

@@ -22,7 +22,6 @@
         "**/enums/*", // excluded as not in release build
         "**/interfaces/*", // excluded as not in release build
         "**/models/*", // excluded as not in release build
-        "**/HtmlToRtfParser.class.ts",
         "**/classes/RtfStreamBuilder.class.ts",
         "**/classes/DocumentBuilderFactory.class.ts",
         "**/classes/Xeptrix_OLD.ts"

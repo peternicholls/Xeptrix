@@ -10,10 +10,7 @@
  *        builder via methods such as `convertHtmlToRtf` etc.
  */
 
-import HtmlToRtfParser from './classes/HtmlToRtfParser.class';
-// import ParsedHtmlData from './classes/interfaces/ParsedHtmlData.interface';
-import DocumentBuilderFactory from './classes/DocumentBuilderFactory.class';
-import RTFDocumentBuilder from './classes/components/RTFDocumentBuilder.class';
+import HtmlToRtfParser from './classes/HtmltoRtfParser.class';
 
 class Xeptrix {
   private html: string;
@@ -23,29 +20,13 @@ class Xeptrix {
   }
 
   public convertHtmlToRtf(): string {
-    /* COMMENTED OUT FOR NOW TO AVOID ERRORS
-    // Create HtmlToRtfParser instance
-    const htmlToRtfParser = new HtmlToRtfParser();
+    return new HtmlToRtfParser(this.html).convert();
+  }
 
-    // Parse the HTML input
-    const parsedHtmlData: ParsedHtmlData = htmlToRtfParser.parse(this.html);
-
-    // Create DocumentBuilderFactory instance
-    const documentBuilderFactory = new DocumentBuilderFactory();
-
-    // Create RTFDocumentBuilder instance
-    const rtfDocumentBuilder: RTFDocumentBuilder = documentBuilderFactory.createDocumentBuilder('rtf') as RTFDocumentBuilder;
-
-    // Generate RTF header and document area
-    const rtfHeader = rtfDocumentBuilder.buildHeader(parsedHtmlData);
-    // const rtfDocumentArea = rtfDocumentBuilder.buildDocumentArea(parsedHtmlData);
-
-    // Combine header, document area, and braces
-    const rtfOutput = `{${rtfHeader}${rtfDocumentArea}}`;
-    */
-    // return rtfOutput;
-    return '';
+  public convert(): string {
+    return this.convertHtmlToRtf();
   }
 }
 
+export { HtmlToRtfParser, Xeptrix };
 export default Xeptrix;

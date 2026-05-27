@@ -3,9 +3,7 @@
 [![NPM version](https://img.shields.io/npm/v/xeptrix.svg)](https://npmjs.org/package/xeptrix)
 [![License](https://img.shields.io/badge/license-AGPLv3-blue)](https://opensource.org/licenses/AGPLv3)
 
-> **NOT READY FOR PRODUCTION USE!**
->
-> While the package is functional, we recommend that you do not use it in production as is. Please check back for progress, or contribute towards the development of this project.
+> **Version 1 scope:** Xeptrix provides a synchronous HTML-to-RTF converter for common document content. It is suitable for plain text, headings, paragraphs, inline text styles, links, lists, simple tables, and basic inline CSS.
 
 ## **About**
 
@@ -50,14 +48,40 @@ import * as Xeptrix from "xeptrix";
 2. Create an instance of the Xeptrix class and use its methods to convert HTML to RTF:
 
 ```typescript
-// Get a HTML string from a file or other source
+// Get an HTML string from a file or other source
 const htmlString = '<p>Hello, World!</p>';
+
 // Create a new Xeptrix instance
 const xeptrix = new Xeptrix(htmlString);
-const rtfOutput = xeptrix('<p>Hello, World!</p>').convert();
-// Create a new document
 const rtfString = xeptrix.convert();
+
+// Alias:
+const sameRtfString = xeptrix.convertHtmlToRtf();
 ```
+
+### **Supported HTML in v1**
+
+- Document containers: `html`, `body`, `main`
+- Blocks: `p`, `div`, `section`, `article`, `header`, `footer`, `aside`, `nav`, `blockquote`
+- Headings: `h1` through `h6`
+- Inline styles: `strong`, `b`, `em`, `i`, `u`, `s`, `strike`, `del`, `sub`, `sup`, `code`
+- Line breaks and preformatted text: `br`, `pre`
+- Lists: `ul`, `ol`, `li`, including nested indentation
+- Links: `a href`
+- Simple tables: `table`, `tr`, `td`, `th`
+- Images: `img alt` is emitted as readable fallback text; binary image embedding is deferred
+- Inline CSS: `font-size`, `font-family`, `color`, `background-color`, and `text-align`
+
+All text content is escaped for RTF control characters, and non-ASCII characters are emitted as RTF Unicode escapes.
+
+### **Deferred or incomplete**
+
+- Full CSS cascade, class selectors, and external stylesheets
+- Embedded binary images and SVG conversion
+- Advanced RTF table sizing, borders, merged cells, and page layout
+- Metadata, headers, footers, stylesheets, list tables, and custom document defaults
+- Streaming conversion for very large documents
+- The experimental builder/factory component architecture remains present for future refactoring but is not part of the v1 public API.
 
 ## **Development**
 

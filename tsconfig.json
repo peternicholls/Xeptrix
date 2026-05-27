@@ -4,6 +4,8 @@
         "module": "commonjs",
         "declaration": true,
         "outDir": "./lib",
+        "rootDir": "./src",
+        "ignoreDeprecations": "6.0",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
@@ -21,6 +23,8 @@
         "**/interfaces/*", // excluded as not in release build
         "**/models/*", // excluded as not in release build
         "**/HtmlToRtfParser.class.ts",
-        "**/classes/RtfStreamBuilder.class.ts"
+        "**/classes/RtfStreamBuilder.class.ts",
+        "**/classes/DocumentBuilderFactory.class.ts",
+        "**/classes/Xeptrix_OLD.ts"
     ]
 }

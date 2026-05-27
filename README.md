@@ -1,6 +1,6 @@
 # **Xeptrix**
 
-[![NPM version](https://img.shields.io/npm/v/xeptrix.svg)](https://npmjs.org/package/xeptrix)
+[![Release](https://img.shields.io/github/v/release/peternicholls/Xeptrix?display_name=tag)](https://github.com/peternicholls/Xeptrix/releases)
 [![License](https://img.shields.io/badge/license-AGPLv3-blue)](https://opensource.org/licenses/AGPLv3)
 
 > **Version 1 scope:** Xeptrix provides a synchronous HTML-to-RTF converter for common document content. It is suitable for plain text, headings, paragraphs, inline text styles, links, lists, simple tables, and basic inline CSS.
@@ -105,7 +105,9 @@ We also use the following tools to help us develop and maintain the project:
 
 ## **Versioning**
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the tags on this repository.
+We use [SemVer](http://semver.org/) for versioning. The root [`VERSION`](./VERSION) file is the central source of truth for the release number, and `npm run version:sync` keeps `package.json` and `package-lock.json` aligned with it.
+
+To publish a GitHub release, update `VERSION`, sync the package metadata, update `CHANGELOG.md`, and run the **Release** GitHub Actions workflow. The workflow validates the package and creates the `v<version>` tag and GitHub release from the checked-in version.
 
 ## **Contributing**
 
@@ -186,9 +188,12 @@ Xeptrix.class.ts // Original main class for converting HTML to RTF
 .gitignore
 .npmignore
 .prettierrc
-CHANGELOG // Maintain a changelog for updates and new releases
+CHANGELOG.md // Maintain a changelog for updates and new releases
 LICENSE // Include the chosen license for the package
 README.md // This file with project documentation and instructions
+VERSION // Central source of truth for the released version number
+scripts\
+  sync-version.mjs // Syncs package metadata from VERSION
 jest.config.js // Jest configuration for running tests
 package.json // npm package file (with lock file)
 tsconfig.json // TypeScript configuration file

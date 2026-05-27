@@ -1,6 +1,6 @@
 {
   "name": "xeptrix",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "displayName": "Xeptrix - Document Format Converter",
   "description": "Document Format Converter for Javascript written in TypeScript",
   "keywords": [
@@ -32,12 +32,12 @@
     "build": "tsc",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
-    "test": "jest --config jest.config.json"
+    "test": "jest --config jest.config.json",
+    "version:sync": "node ./scripts/sync-version.mjs",
+    "version:check": "node ./scripts/sync-version.mjs --check",
+    "release:validate": "npm test -- --runInBand && npm run build && npm run lint"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.5",

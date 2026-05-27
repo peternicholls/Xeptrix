@@ -145,7 +145,7 @@ class HtmlToRtfParser {
           element.textContent || '',
         )}\\f0\\fs${DEFAULT_FONT_SIZE}\\par `;
       case 'code':
-        return `{\\f1 ${styledContent}}`;
+        return `{\\f${this.getMonospaceFontIndex()} ${styledContent}}`;
       case 'blockquote':
         return `\\pard\\li720 ${styledContent}\\par `;
       case 'a':

@@ -5,7 +5,7 @@
         "declaration": true,
         "outDir": "./lib",
         "rootDir": "./src",
-        "ignoreDeprecations": "6.0",
+        "ignoreDeprecations": "5.0",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
